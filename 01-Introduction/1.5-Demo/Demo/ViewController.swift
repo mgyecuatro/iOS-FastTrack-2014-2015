@@ -30,9 +30,9 @@ class ViewController: UIViewController {
         //Useful closure to extract the time in a given format
         let time = { (format : String) -> String in
             let date = NSDate()
-            let fmt = NSDateFormatter()
-            fmt.dateFormat = format
-            let desc = fmt.stringFromDate(date)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = format
+            let desc = formatter.stringFromDate(date)
             return desc
         }
         
