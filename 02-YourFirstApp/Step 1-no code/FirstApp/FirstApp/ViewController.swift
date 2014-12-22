@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  FirstApp
 //
-//  Created by Nicholas Outram on 22/12/2014.
-//  Copyright (c) 2014 Plymouth University. All rights reserved.
+//  Created by Nicholas Outram on 19/12/2014.
+//  Copyright (c) 2014 Nicholas Outram. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 
 }
 

@@ -22,6 +22,9 @@
                                 <state key="normal" title="Tell Me!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="doButtonTap:" destination="BYZ-38-t0r" eventType="touchDown" id="ZPc-xs-EdR"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have a message..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-No-tuD">
                                 <rect key="frame" x="169" y="110" width="261" height="37"/>
@@ -38,6 +41,9 @@
                             <constraint firstAttribute="centerX" secondItem="dKh-No-tuD" secondAttribute="centerX" id="Guh-0i-2HO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="dKh-No-tuD" id="cbB-0H-Axf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
