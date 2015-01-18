@@ -16,13 +16,14 @@ class ViewController: UIViewController {
         "May the force be with you",
         "Live long and prosper",
         "To infinity and beyond",
-        "Space is big. You just won't believe how vastly, hugely, mind- bogglingly big it is"]
+        "Space is big. You just won't believe how vastly, hugely,mind- bogglingly big it is"]
     
     var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, 
+        // typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
