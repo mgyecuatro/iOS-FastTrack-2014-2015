@@ -25,7 +25,6 @@ println("string 1: \(str2)")
 //Note also that the operator + has been overloaded to join strings...which is nice.
 
 
-
 /***************************************
 TOPIC 2: Initialisation
 ****************************************/
@@ -59,7 +58,7 @@ nextYear = 2016
 
 
 /***************************************
-TOPIC 3: Type Safety
+TOPIC 3: Types are Objects
 ****************************************/
 let p : Double = 10.1234567890123
 
@@ -69,18 +68,35 @@ let p : Double = 10.1234567890123
 //You cannot simply equate variables of different types.
 
 //The next line creates a new Float with p passed to it's constructor
-//Yes, all datatypes are objects!
-var fVal : Float = Float(p)             //This will loose precision
-
+//Yes, all datatypes are objects and they have constructors!
+var fVal : Float = Float(p)             //This will create a float (and loose precision of course)
 var iVal : Int = Int(floor(p + 0.5))    //This performs a round then a conversion
 
 //Note how data types are objects. Don't worry about this having any impact on the perforamnce of compiled code.
 //You can trust the compiler to optimise this
 
-//This is a useful one to know - we've not covered functions yet. String has an initialiser that takes a C-like format string
+//It's not just constructors. There are properties as well
+//For a simple string representation, you can use the computed property description
+let strNum = "The number is " + p.description + "."
+println(" \(strNum)")
+
+//This one is useful.
+//String has an initialiser that takes a C-like format string
 var strNumber = String(format: "%4.1f", p);
 println("The number rounded down is \(strNumber)")
 
+//You can even add your own functions using Swift "extensions" (getting ahead of myself here)
+//As everything is an object, then with Swift we can extend it!
+
+//Constant p is of type Double (a struct) - we can extend the object Double to include a new method
+extension Double {
+    func asSinglePrecisionString() -> String {
+        let strOfNumber = String(format: "%4.1f", self)
+        return strOfNumber
+    }
+}
+//Now apply this function
+let strOfP = p.asSinglePrecisionString()
 
 
 /****************************************
@@ -172,6 +188,7 @@ if let v = dblVal {
 
 //Second time, the string is not a valid number - the evaluation gets as far as NSNumberFormatter().numberFromString(strCandidate2)
 dblVal = NSNumberFormatter().numberFromString(strCandidate2)?.doubleValue
+
 //The ? above tells the compiler to only continue evauation if the result can be safely unwrapped, otherwise stop processing
 //We now conditionally unwrap using "if let"
 if let v = dblVal {
@@ -288,11 +305,15 @@ TOPIC 5: Examples of some additional value types
 
 //Tuples - grouping data together. Great for returning multiple data from functions
 let guitar : (Int, String) = (69, "Stratocaster")
+let (yr : Int, model : String) = guitar
+
+
 let axes : (String, String, String) = ("Red Special", "Brian May", "Homemade")
 let (name,owner,manu) = axes
 name
 owner
 manu
+//More on Tuples and pattern matching later
 
 
 //Dictionaries (or hashmaps for Java developers) have a nice syntax and are strongly typed
@@ -310,6 +331,18 @@ if let briCost = instruments["RedSpecial"] {
 } else {
     println("That guitar is not for sale")
 }
+
+//Closing point - just to get you thinking.... Functions are also types!
+func add( v1 : Int, v2 : Int ) -> Int {
+    return v1 + v2
+}
+func mul( v1 : Int, v2 : Int ) -> Int {
+    return v1 * v2
+}
+
+var fn : (Int, Int) -> Int = add
+
+//Enough of that for now :o)
 
 
 
