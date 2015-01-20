@@ -2,16 +2,16 @@
 Playground on Variables
 *************************
 */
-
 import UIKit
 
-/***************************************
-TOPIC 1: Mutable and Immutable Variables
-****************************************/
+
+/*******************************
+TOPIC 1: Mutables and Immutables
+*******************************/
 
 //Variable declaration - one with var, another with let
-// var is mutable
-// let is immutable
+// var is mutable (variable)
+// let is immutable (constant)
 var str1 : String = "Hello, playground"
 let str2 : String = "Hello, playground"
 
@@ -32,7 +32,7 @@ TOPIC 2: Initialisation
 
 //For safely, variables cannot be used until they are initialised.
 
-//This variable is strongly types, but uninitialised
+//This variable is strongly typed, but uninitialised
 var age : Int
 
 //What do you think will happen if you uncomment this line?
@@ -44,6 +44,19 @@ var age : Int
 This is a safety feature. Using variables before they are initialised can result in bugs that
 are hard to track down. We will have more to say about initialisation when we look at structures and classes
 */
+
+// Initialisation is not limited to literals.
+// You can also initialise variables with an expression, such as the following example
+var year = 2015
+var msg : String = String(format: "Age is %d", year)
+
+//Variable initialisation does not need to inline
+var nextYear : Int
+nextYear = 2016
+// TASK - change nextYear to a constant with let - what happens?
+// Constants need an initialiser expression
+// Note - this rules depends on context - e.g. if declared inside a class or struct, it becomes a constant property
+
 
 /***************************************
 TOPIC 3: Type Safety
@@ -269,6 +282,34 @@ if (xx === zz) {
 //It might be an idea to use a naming convention for reference objects?
 
 
+/***********************************************
+TOPIC 5: Examples of some additional value types
+***********************************************/
+
+//Tuples - grouping data together. Great for returning multiple data from functions
+let guitar : (Int, String) = (69, "Stratocaster")
+let axes : (String, String, String) = ("Red Special", "Brian May", "Homemade")
+let (name,owner,manu) = axes
+name
+owner
+manu
+
+
+//Dictionaries (or hashmaps for Java developers) have a nice syntax and are strongly typed
+let instruments : [String : Int] = ["69 Stratocaster" : 4000, "74 LesPaul" : 2200]
+
+//However, looking up key-value pairs in a dictionary can fail, so a dictionary always returns an optional
+if let fCost = instruments["69 Stratocaster"] {
+    println("69 Fender costs est. \(fCost) USD")
+}
+if let gCost = instruments["74 LesPaul"] {
+    println("74 Gibson Les Paul cost est. \(gCost) USD")
+}
+if let briCost = instruments["RedSpecial"] {
+    println("Red Special valued at £\(briCost) GBP")
+} else {
+    println("That guitar is not for sale")
+}
 
 
 
