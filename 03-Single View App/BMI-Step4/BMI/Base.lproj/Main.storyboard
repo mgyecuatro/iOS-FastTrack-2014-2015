@@ -133,7 +133,6 @@
                                         <include reference="gRt-AD-BOg"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
