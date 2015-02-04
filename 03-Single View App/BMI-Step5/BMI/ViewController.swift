@@ -10,7 +10,9 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
 
-
+    @IBOutlet weak var bmiLabel: UILabel!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-       
+    
     
 }
 
