@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
-
     var weight : Double?
     var height : Double?
     var bmi : Double? {
@@ -48,7 +47,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+
     func textFieldDidEndEditing(textField: UITextField) {
+        
 
         let conv = { NSNumberFormatter().numberFromString($0)?.doubleValue }
         
@@ -59,9 +60,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.height = conv(textField.text)
         default:
             println("Something has gone very wrong!")
+            //Or just write 'break'
         }
         
         updateUI()
     }
+
 }
 
