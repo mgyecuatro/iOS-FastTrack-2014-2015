@@ -413,6 +413,7 @@
 				077E2E831AA0D01700E4365C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		077E2E841AA0D01700E4365C /* Build configuration list for PBXNativeTarget "NavigationDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				077E2E861AA0D01700E4365C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
