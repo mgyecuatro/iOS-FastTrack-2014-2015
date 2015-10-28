@@ -156,6 +156,7 @@
 		0762B7251A52F49000221546 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Plymouth University";
 				TargetAttributes = {
@@ -407,6 +408,7 @@
 				0762B74E1A52F49000221546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0762B74F1A52F49000221546 /* Build configuration list for PBXNativeTarget "BMITests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +417,7 @@
 				0762B7511A52F49000221546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
