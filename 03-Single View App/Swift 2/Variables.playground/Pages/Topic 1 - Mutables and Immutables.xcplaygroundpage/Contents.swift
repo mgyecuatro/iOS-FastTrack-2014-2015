@@ -57,6 +57,4 @@ nextYear = 2016
 */
 
 
-
-
 //: [Next](@next)
