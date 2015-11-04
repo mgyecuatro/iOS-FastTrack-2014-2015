@@ -106,18 +106,10 @@
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpv-3d-SkW">
                                         <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
                                         <animations/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="beo-Wq-x9K"/>
-                                            <outlet property="delegate" destination="BYZ-38-t0r" id="0FN-IN-spu"/>
-                                        </connections>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxm-v4-Jyw">
                                         <rect key="frame" x="0.0" y="-162" width="320" height="162"/>
                                         <animations/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="XS9-Io-hwM"/>
-                                            <outlet property="delegate" destination="BYZ-38-t0r" id="z5d-F5-ZGZ"/>
-                                        </connections>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSn-rg-qKl">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -126,7 +118,7 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="----" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1l-jm-OCv">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1l-jm-OCv">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -378,9 +370,7 @@
                     </view>
                     <connections>
                         <outlet property="bmiLabel" destination="j1l-jm-OCv" id="xHb-lV-Vmn"/>
-                        <outlet property="heightPickerView" destination="nxm-v4-Jyw" id="QFI-Nr-pCV"/>
                         <outlet property="heightTextField" destination="EbC-AZ-mc8" id="pgy-Rr-ELR"/>
-                        <outlet property="weightPickerView" destination="jpv-3d-SkW" id="Xdz-4B-BOL"/>
                         <outlet property="weightTextField" destination="SnQ-hV-Udl" id="GIa-qu-cTQ"/>
                     </connections>
                 </viewController>

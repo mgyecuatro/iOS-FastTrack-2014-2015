@@ -1,10 +1,11 @@
-//
-//  ViewController.swift
-//  BMI
-//
-//  Created by Nicholas Outram on 30/12/2014.
-//  Copyright (c) 2014 Plymouth University. All rights reserved.
-//
+   //
+   //  ViewController.swift
+   //  BMI
+   //
+   //  Created by Nicholas Outram on 30/12/2014.
+   //  Copyright (c) 2014 Plymouth University. All rights reserved.
+   //
+   // 04-11-2015  Updated for Swift 2
 
 import UIKit
 
@@ -54,28 +55,47 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
             self.bmiLabel.text = "----"
         }
     }
-    
-//    func textFieldDidEndEditing(textField: UITextField) {
-//        
-//        let conv = { NSNumberFormatter().numberFromString($0)?.doubleValue }
-//        
-//        switch (textField) {
-//            
-//        case self.weightTextField:
-//            self.weight = conv(textField.text)
-//            
-//        case self.heightTextField:
-//            self.height = conv(textField.text)
-//            
-//        default:
-//            println("Error");
-//            
-//        }
-//        
-//        updateUI()
-//        
-//    }
-    
+   
+   
+//   //Called when ever the textField looses focus
+//   func textFieldDidEndEditing(textField: UITextField) {
+//      
+//      //First we check if textField.text actually contains a (wrapped) String
+//      guard let txt : String = textField.text else {
+//         //Simply return if not
+//         return
+//      }
+//      
+//      //At this point, txt is of type String. Here is a nested function that will be used
+//      //to parse this string, and convert it to a wrapped Double if possible.
+//      func conv(numString : String) -> Double? {
+//         let result : Double? = NSNumberFormatter().numberFromString(numString)?.doubleValue
+//         return result
+//      }
+//      
+//      //Which textField is being edit?
+//      switch (textField) {
+//         
+//      case heightTextField:
+//         self.height = conv(txt)
+//         
+//      case weightTextField:
+//         self.weight = conv(txt)
+//         
+//         //default must be here to give complete coverage. A safety precaution.
+//      default:
+//         print("Something bad happened!")
+//         
+//      } //end of switch
+//      
+//      //Last of all, update the user interface.
+//      updateUI()
+//      
+//   }
+   
+   
+   
+
     // SOLUTION TO CHALLENGE
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
@@ -153,9 +173,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
         
         updateUI()
     }
-    
-  
-    
-    
+   
 }
 
