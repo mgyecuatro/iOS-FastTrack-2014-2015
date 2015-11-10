@@ -30,8 +30,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
    }
    
    //Initialised arrays of values to be displayed in the picker
-   let listOfHeightsInM  = Array(140...220).map({ Double($0) * 0.01 })
-   let listOfWeightsInKg = Array(80...240).map({ Double($0) * 0.5 })
+   let listOfHeightsInM  = Array(140...220).map({Double($0) * 0.01})
+   let listOfWeightsInKg = Array(80...240).map({Double($0) * 0.5})
    
    //
    // OUTLETS
