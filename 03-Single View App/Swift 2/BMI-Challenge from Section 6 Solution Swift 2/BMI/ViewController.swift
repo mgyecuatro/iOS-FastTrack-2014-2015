@@ -11,20 +11,27 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    let listOfWeightsInKg = Array(80...240).map( { Double($0) * 0.5 } )
-    let listOfHeightsInM  = Array(140...220).map( { Double($0) * 0.01 } )
-
-    var weight : Double?
-    var height : Double?
-    var bmi : Double? {
-        get {
-            if (weight != nil) && (height != nil) {
-                return weight! / (height! * height!)
-            } else {
-                return nil
-            }
-        }
-    }
+   class func doDiv100(u : Int) -> Double {
+      return Double(u) * 0.01
+   }
+   
+   class func doDiv2(u : Int) -> Double {
+      return Double(u) * 0.5
+   }
+   
+   var weight : Double?
+   var height : Double?
+   var bmi : Double? {
+      get {
+         if (weight != nil) && (height != nil) {
+            return weight! / (height! * height!)
+         } else {
+            return nil
+         }
+      }
+   }
+   let listOfHeightsInM  = Array(140...220).map(ViewController.doDiv100)
+   let listOfWeightsInKg = Array(80...240).map(ViewController.doDiv2)
     
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var heightTextField: UITextField!
