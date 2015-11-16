@@ -13,8 +13,6 @@
 		0762B73A1A52F49000221546 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0762B7391A52F49000221546 /* Images.xcassets */; };
 		0762B73D1A52F49000221546 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0762B73B1A52F49000221546 /* LaunchScreen.xib */; };
 		0762B7491A52F49000221546 /* BMITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0762B7481A52F49000221546 /* BMITests.swift */; };
-		07667FFF1BFA1A7F00A1194C /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07667FFE1BFA1A7F00A1194C /* Media.xcassets */; };
-		07CC21B71BFA269600120BBC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CC21B61BFA269600120BBC /* AboutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +36,6 @@
 		0762B7421A52F49000221546 /* BMITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BMITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0762B7471A52F49000221546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0762B7481A52F49000221546 /* BMITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMITests.swift; sourceTree = "<group>"; };
-		07667FFE1BFA1A7F00A1194C /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		07CC21B61BFA269600120BBC /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +80,7 @@
 				0762B7321A52F49000221546 /* AppDelegate.swift */,
 				0762B7341A52F49000221546 /* ViewController.swift */,
 				0762B7361A52F49000221546 /* Main.storyboard */,
-				07CC21B61BFA269600120BBC /* AboutViewController.swift */,
 				0762B7391A52F49000221546 /* Images.xcassets */,
-				07667FFE1BFA1A7F00A1194C /* Media.xcassets */,
 				0762B73B1A52F49000221546 /* LaunchScreen.xib */,
 				0762B7301A52F49000221546 /* Supporting Files */,
 			);
@@ -202,7 +196,6 @@
 			files = (
 				0762B7381A52F49000221546 /* Main.storyboard in Resources */,
 				0762B73D1A52F49000221546 /* LaunchScreen.xib in Resources */,
-				07667FFF1BFA1A7F00A1194C /* Media.xcassets in Resources */,
 				0762B73A1A52F49000221546 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,7 +214,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07CC21B71BFA269600120BBC /* AboutViewController.swift in Sources */,
 				0762B7351A52F49000221546 /* ViewController.swift in Sources */,
 				0762B7331A52F49000221546 /* AppDelegate.swift in Sources */,
 			);
