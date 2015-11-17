@@ -1,5 +1,5 @@
 //
-//  AboutViewController.swift
+//  BMIAboutViewController.swift
 //  BMI
 //
 //  Created by Nicholas Outram on 16/11/2015.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutViewController: UIViewController {
+class BMIAboutViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class AboutViewController: UIViewController {
     }
     
    @IBAction func doDismiss(sender: AnyObject) {
-      self.dismissViewControllerAnimated(true, completion: {})
+      self.dismissViewControllerAnimated(true, completion: { })
    }
 
     /*
