@@ -1,14 +1,18 @@
-import Cocoa
-import AppKit
+//: [Previous](@previous)
+import UIKit
 import XCPlayground
 
-//: ![Functional Programming Examples](Banner.jpg)
+//: ![Functions Part 2](banner.png)
 
-//: # Functional Programming Examples
+//: # Functions Part 2 - Section 2 - Functional Programming Examples
+//: Version 2 - updated for Swift 2
 //:
-//: For Xcode 7.1.1 
+//: For Xcode 7.1.1
 //:
 //: Updated 18th November 2015
+//: 23-11-2015
+//:
+//: This playground is designed to support the materials of the lecure "Functions 2".
 
 //: In this playground, I am going to build up a simple example of functional programming. We will meet first class functions, function types, Currying and function composition.
 
@@ -27,17 +31,17 @@ typealias Transform2D = Point2D -> Point2D  //Function type
 //:
 //: The nested functions captures `offset`, an additional Point2D (2D vector) used in subsequent calculations.
 //: As the `offset` parameter is not mutated outside the nested function, then a copy is said to be captured.
-//: Note that *it is the nested **function** that is returned*. This function takes a 2D Point as a parameter and returns a new point. It uses the *captured* `offset` to perform the calculation. 
+//: Note that *it is the nested **function** that is returned*. This function takes a 2D Point as a parameter and returns a new point. It uses the *captured* `offset` to perform the calculation.
 
 func translate(offset: Point2D) -> Transform2D {
-    func tx(point: Point2D) -> Point2D {
-        //Capture offset
-        let off = offset
-        //Calculate and return new point
-        return (x: point.x + off.x, y: point.y + off.y)
-    }
-    
-    return tx
+   func tx(point: Point2D) -> Point2D {
+      //Capture offset
+      let off = offset
+      //Calculate and return new point
+      return (x: point.x + off.x, y: point.y + off.y)
+   }
+   
+   return tx
 }
 
 //: ![Translate function](translate.png)
@@ -49,13 +53,13 @@ func translate(offset: Point2D) -> Transform2D {
 //: Again, the nested function captures a copy of the scaling factor provided by the enslosing scope.
 
 func scaleTransform(scale: Double) -> Transform2D {
-
-    func tx(point: Point2D) -> Point2D {
-        let s = scale
-        return (x: point.x * s, y: point.y * s)
-    }
-    
-    return tx
+   
+   func tx(point: Point2D) -> Point2D {
+      let s = scale
+      return (x: point.x * s, y: point.y * s)
+   }
+   
+   return tx
 }
 
 //: ![Scale function](scale.png)
@@ -68,19 +72,19 @@ func scaleTransform(scale: Double) -> Transform2D {
 //: * Is `cos_ø` and `sin_ø` that are captured by the nested function and returned.
 
 func rotate(angleInDegrees: Double) -> Transform2D {
-    let π = M_PI
-    let radians = π * angleInDegrees / 180.0
-    let cos_ø = cos(radians)
-    let sin_ø = sin(radians)
-    
-    // The transform is a rotation
-    func rotate (point : Point2D) -> Point2D {
-        //cos_ø and sin_ø are 'captured' inside this closure
-        let newX =  cos_ø * point.x + sin_ø * point.y
-        let newY = -sin_ø * point.x + cos_ø * point.y
-        return (x: newX, y: newY)
-    }
-    return rotate
+   let π = M_PI
+   let radians = π * angleInDegrees / 180.0
+   let cos_ø = cos(radians)
+   let sin_ø = sin(radians)
+   
+   // The transform is a rotation
+   func rotate (point : Point2D) -> Point2D {
+      //cos_ø and sin_ø are 'captured' inside this closure
+      let newX =  cos_ø * point.x + sin_ø * point.y
+      let newY = -sin_ø * point.x + cos_ø * point.y
+      return (x: newX, y: newY)
+   }
+   return rotate
 }
 
 //: If I had only planned to perform a single rotation, I might have done this differently and calculated `cos_ø` and `sin_ø` within the nested function. This was the expensive `cos` and `sin` functions would only be performed if/when actually needed (lazily).
@@ -93,8 +97,8 @@ func rotate(angleInDegrees: Double) -> Transform2D {
 //: Used later in the advanced task.
 //:
 func negate(p: Point2D) -> Point2D {
-    let minus_p = (x: -p.x, y: -p.y)
-    return minus_p
+   let minus_p = (x: -p.x, y: -p.y)
+   return minus_p
 }
 
 
@@ -106,11 +110,11 @@ func negate(p: Point2D) -> Point2D {
 //:
 //: Where two functions are to be applied, one to the output of the other, then we can create a higher-order function to perform this for us.
 //:
-func composeTransform(f1: Transform2D, f2: Transform2D) -> Transform2D {
-    func tx(point: Point2D) -> Point2D {
-        return f2(f1(point))
-    }
-    return tx
+func composeTransform(f1: Transform2D, _ f2: Transform2D) -> Transform2D {
+   func tx(point: Point2D) -> Point2D {
+      return f2(f1(point))
+   }
+   return tx
 }
 
 //: ### To make it resemble a UNIX pipe, I've created a custom operator |-> . Note the associativity is critcal
@@ -118,10 +122,10 @@ func composeTransform(f1: Transform2D, f2: Transform2D) -> Transform2D {
 
 infix operator |-> { associativity left }
 func |-> (f1: Transform2D, f2: Transform2D) -> Transform2D {
-    func tx(point: Point2D) -> Point2D {
-        return f2(f1(point))
-    }
-    return tx
+   func tx(point: Point2D) -> Point2D {
+      return f2(f1(point))
+   }
+   return tx
 }
 
 //: ## Testing
@@ -149,12 +153,12 @@ let p4 = rotate1(p3)
 //: Dictionary of points (Label : Coordinate) used for plotting
 let points1 = ["A" : p1, "B" : p2, "C" : p3, "D" : p4]
 
-//: Plot each point on a 2D graph 
+//: Plot each point on a 2D graph
+//Wrapper function around PlotView initialiser
 let f = CGRectMake(0.0, 0.0, 400.0, 400.0) //Common to all
-func PlotViewWithPoints(p : [String : Point2D]) -> NSView { //Wrapper function around PlotView initialiser
+func PlotViewWithPoints(p : [String : Point2D]) -> UIView {
    return PlotView(frame: f, points: p)    //Capture f
 }
-
 let plot1 = PlotViewWithPoints(points1)
 
 
@@ -196,26 +200,26 @@ let plot3 = PlotViewWithPoints(points3)
 
 //: This version uses Currying so that only one parameter is ever passed
 func orbit(center center : Point2D) -> (Double -> Transform2D) {
-    let minusCenter = negate(center)
-    func R(angle : Double) -> Transform2D {
-        let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
-        return tx
-    }
-    return R
+   let minusCenter = negate(center)
+   func R(angle : Double) -> Transform2D {
+      let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
+      return tx
+   }
+   return R
 }
 
 //: So does this version, but it uses the alternative syntax and is easier to read
 func orbit_nicecurry(center center : Point2D)(angle: Double) -> Transform2D {
-    let minusCenter = negate(center)
-    let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
-    return tx
+   let minusCenter = negate(center)
+   let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
+   return tx
 }
 
 //: This version is not curried - which is ok as well if you don't want partial evaluation
 func orbit_notcurried(center center : Point2D, angle: Double) -> Transform2D {
-    let minusCenter = negate(center)
-    let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
-    return tx
+   let minusCenter = negate(center)
+   let tx = translate(minusCenter) |-> rotate(angle) |-> translate(center)
+   return tx
 }
 
 
@@ -226,7 +230,7 @@ let plot4 = PlotViewWithPoints(points3)
 
 //: ### Test 5 - Orbit function with partial evaluation
 
-//: What is interesting with the Curried version is that you can prepare partially incomplete orbits. This allows partially evaulated orbits to be passed to other code. 
+//: What is interesting with the Curried version is that you can prepare partially incomplete orbits. This allows partially evaulated orbits to be passed to other code.
 
 //: For example:
 let solarOrbit = orbit(center : sun)
@@ -234,8 +238,8 @@ let solarOrbit = orbit(center : sun)
 //: We can now apply different angles around the sun
 var trans = [Transform2D]()         //Array of functions (all with captured data of course!)
 for (var ß = 0.0; ß<360.0; ß+=60.0) {
-    let tx = solarOrbit(ß)
-    trans.append(tx)
+   let tx = solarOrbit(ß)
+   trans.append(tx)
 }
 
 //: Now we can apply this to different planets
@@ -244,8 +248,8 @@ let mercury = Point2D(x: 70.0, y: 75.0)
 var planetOrbits   = [String : Point2D]()
 
 for (idx,f) in trans.enumerate() {
-    planetOrbits["e\(idx)"] = f(earth)
-    planetOrbits["m\(idx)"] = f(mercury)
+   planetOrbits["e\(idx)"] = f(earth)
+   planetOrbits["m\(idx)"] = f(mercury)
 }
 let plot5 = PlotViewWithPoints(planetOrbits)
 
@@ -256,7 +260,7 @@ let plot5 = PlotViewWithPoints(planetOrbits)
 //: * There is something intellectually enjoyable about FP. It's hard to write, but very rewarding when you get it to work. Is fun enough justification? Well, nothing wrong with having fun of course.
 //: * There are those who claim FP is 'superior', and others who are more sceptical.
 //: * Some say it makes you a better programmer even if you don't use it all the time.
-//: 
+//:
 //: I encourage students to be guarded, critical and open-minded when it comes to big claims you might read or hear.
 //:
 //: * There is nothing to say you must learn to use FP. I've seen nothing in the Apple frameworks or documentation that seem to demand it beyond passing functions as parameters (nice way to create call backs essentially).
@@ -270,8 +274,8 @@ let plot5 = PlotViewWithPoints(planetOrbits)
 //: * If FP means you write safer code (e.g. concurrent code), this is probably a good reason to use it
 //: * FP may or may not be more efficient (I've no idea which + it might change as the language evolves) - if you're writing CPU intensive code, benchmark carefully!
 //: * If you have to bend FP to solve a problem that is more simply/naturally solved with imperitive styles (e.g. GUI code), then I envy your spare time ;o)
-//: 
+//:
 //: Swift may have a reasonably low entry point for learning to code, but a high ceiling if you want to master it in its entirity. Considerable effort seems to have gone into keeping Swift syntax clean and easy to read, even when writing FP.
 //: What ever style you use, happy coding and don't forget to get enough sleep!
 
-
+//: [Next](@next)

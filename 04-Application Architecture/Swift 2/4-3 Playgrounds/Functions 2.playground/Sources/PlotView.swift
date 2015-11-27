@@ -1,17 +1,18 @@
-import AppKit
+import UIKit
 public typealias Point2D = (x: Double, y: Double)  //2D point in a Tuple
 
 
 // Custom View for Plotting 2D Points
-public class PlotView : NSView {
+public class PlotView : UIView {
     
     var points : [String : Point2D] = [String : Point2D]()
     
-    override public func drawRect(dirtyRect: NSRect) {
+    override public func drawRect(dirtyRect: CGRect) {
 
         super.drawRect(dirtyRect)
         
         //Move the origin to the center of the bounds box
+        let Y1 = self.bounds.height
         let W2 = self.bounds.width * 0.5
         let H2 = self.bounds.height * 0.5
         let xc = self.bounds.origin.x + W2
@@ -23,39 +24,43 @@ public class PlotView : NSView {
       
         //The following two functions perform a translation from (0,0) origin to (W2,H2)
         func PVPointMake(x : CGFloat, _ y : CGFloat) -> CGPoint {
-           return CGPointMake(x + W2, y + H2)
+//           return CGPointMake(x + W2, y + H2)
+            return CGPointMake(x+W2, Y1-y - H2)
         }
         func PVRectMake(x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
-           let r = CGRectMake(x + W2, y + H2, width, height)
+//           let r = CGRectMake(x + W2, y + H2, width, height)
+           let r = CGRectMake(x + W2, Y1 - y - H2, width, height)
            return r
         }
       
         //The remaining code assumes an origin of (0,0)
-        NSColor.whiteColor().set()
-        NSBezierPath.fillRect(self.bounds)
-        
-        //Now draw major axis
-        NSBezierPath.setDefaultLineWidth(2.0)
-        NSColor.blackColor().setStroke()
-        
-        let vLine =  NSBezierPath()
+      
+        //Fill plot area
+        UIColor.whiteColor().set()
+        UIBezierPath(rect: self.bounds).fill()
 
+        //Now draw major axis
+      
+        let vLine =  UIBezierPath()
+        vLine.lineWidth = 2.0
+        UIColor.blackColor().setStroke()
+      
         vLine.moveToPoint(PVPointMake(-W2, 0))
-        vLine.lineToPoint(PVPointMake(W2, 0.0))
+        vLine.addLineToPoint(PVPointMake(W2, 0.0))
         vLine.stroke()
         vLine.fill()
-        
+
         vLine.moveToPoint(PVPointMake(0, -H2))
-        vLine.lineToPoint(PVPointMake(0, H2))
+        vLine.addLineToPoint(PVPointMake(0, H2))
         vLine.stroke()
         vLine.fill()
-        
+
         //
         // Plot points
         //
-        func circlePathAtPoint(x : Double, _ y : Double) -> NSBezierPath {
+        func circlePathAtPoint(x : Double, _ y : Double) -> UIBezierPath {
             let p = PVRectMake(CGFloat(x-5.0), CGFloat(y-5.0), 10.0, 10.0)
-            let c = NSBezierPath(ovalInRect: p)
+            let c = UIBezierPath(ovalInRect: p)
             return c
         }
 
@@ -63,8 +68,8 @@ public class PlotView : NSView {
         for (label, p) in points {
             let circle = circlePathAtPoint(p.x, p.y)
             //Set line and fill color
-            NSColor.blueColor().setStroke()
-            NSColor.yellowColor().setFill()
+            UIColor.blueColor().setStroke()
+            UIColor.yellowColor().setFill()
             //Draw
             circle.stroke()
             circle.fill()
@@ -76,7 +81,7 @@ public class PlotView : NSView {
     }
     
     //Constructor
-    public init(frame frameRect: NSRect, points: [String : Point2D]) {
+    public init(frame frameRect: CGRect, points: [String : Point2D]) {
         super.init(frame: frameRect)
         self.points = points
     }

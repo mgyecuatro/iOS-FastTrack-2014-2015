@@ -66,10 +66,15 @@ func force1b(mass m : Double, acceleration a : Double) -> Double {
 }
 let f1b = force1b(mass: 10.0, acceleration: 2.0)
 //: Although verbose, this is very explicit
-
+//: 
+//: I could have written this slightly differently
+func force1b_alt(mass m : Double, acceleration : Double) -> Double {
+   return m * acceleration
+}
+let f1b_alt = force1b(mass: 10.0, acceleration: 2.0)
 //: ### Review 1c - parameter 1 in the name, external parameter name for second
-func forceForMass(mass : Double, withAcceleration acc: Double) -> Double {
-   return mass * acc
+func forceForMass(m : Double, withAcceleration a: Double) -> Double {
+   return m * a
 }
 let f1c = forceForMass(10.0, withAcceleration: 2.0)
 //: I have chosen to use an explicit second parameter name here. This is to make the invokation read like natural language. If you did not do this, and used the same as the parameter name, that's ok.

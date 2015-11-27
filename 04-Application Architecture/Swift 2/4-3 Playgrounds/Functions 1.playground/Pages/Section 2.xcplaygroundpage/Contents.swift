@@ -33,6 +33,16 @@ print("It is day \(anotherDay) in the month of \(anotherMonth)")
 let oneMoreDate : (month: String, day: Int) = anotherDate
 print("It is day \(oneMoreDate.day) in the month of \(oneMoreDate.month)")
 
+//: However, the labels are optional
+let yetAnotherDate : (String,Int) = anotherDate
+
+//: Previously, this was defined: `let theDate : (String, Int) = ("January", 30)` where labels were not used. Again, you can still use labels
+
+let theDateLabelled : (month:String, day:Int) = theDate
+theDateLabelled.month
+//: If you uncomment the following, it will give an error (as theDay has no labels in it's data type)
+//theDay.month
+
 //: ### Example - Returning multiple data with a Tuple
 
 func currentDate() -> (day:Int, month:String, year:Int)
@@ -97,6 +107,7 @@ func normalise(x x:Double, y:Double, scale:Double=1.0) -> (x:Double,y:Double)?
    }
    return (x: x/magnitude, y: y/magnitude)
 }
+
 //: Using a prescribed scale
 if let vec = normalise(x: 2.0, y: 3.0, scale: 2.0) {
    print("\(vec)")
