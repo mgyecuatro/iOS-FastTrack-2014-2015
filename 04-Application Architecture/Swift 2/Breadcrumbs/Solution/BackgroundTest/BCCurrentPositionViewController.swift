@@ -12,7 +12,9 @@ import MapKit
 
 class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BCOptionsSheetDelegate {
 
-   //: MARK: Enumerated types
+   // **********************
+   // MARK: Enumerated types
+   // **********************
    
    /// The application state - "where we are in a known sequence"
    enum AppState {
@@ -45,13 +47,18 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       case UserWantsToStart(Bool)
    }
    
+   // *************
    // MARK: Outlets
+   // *************
+   
    @IBOutlet weak var startButton: UIBarButtonItem!
    @IBOutlet weak var stopButton: UIBarButtonItem!
    @IBOutlet weak var optionsButton: UIBarButtonItem!
    @IBOutlet weak var mapView: MKMapView!
 
+   // ****************
    // MARK: Properties
+   // ****************
    
    /// Appliction state. Important to manage the possible sequence of events that can occur in an app life cycle
    /// - warning: Should only be set via the `updateStateWithInput()` method
@@ -97,6 +104,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    
    //Internal flag for deferred updates
    var deferringUpdates : Bool = false
+   
+   //Array of GPS locations
+   var arrayOfLocations = [CLLocation]()
    
    // ************************
    // MARK: Class Initialisers
@@ -223,6 +233,17 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       
       print("\(locations.count) Location(s) Updated: \(location)")
 
+      //Store in array
+      for loc in locations {
+         self.arrayOfLocations.append(loc)
+      }
+      
+      //Update overlay of the journey
+      var arrayOfCoords : [CLLocationCoordinate2D] = arrayOfLocations.map{$0.coordinate}  //Array of coordinates
+      let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
+      self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
+      self.mapView.addOverlay(line)                      //Add updated
+      
       /// TODO: test this power saving option
 //      if (!self.deferringUpdates) {
 //         manager.allowDeferredLocationUpdatesUntilTraveled(self.options.distanceBetweenMeasurements*100.0, timeout: CLTimeIntervalMax)
@@ -245,6 +266,13 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       mapView.userTrackingMode = .Follow
    }
    
+   func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+      let path = MKPolylineRenderer(overlay: overlay)
+      path.strokeColor = UIColor.purpleColor()
+      path.lineWidth = 2.0
+      path.lineDashPattern = [10, 4]
+      return path
+   }
    // **************************
    // MARK: Finite State Machine
    // **************************
@@ -333,7 +361,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          
          //Live Map
          mapView.showsUserLocation = true
-         mapView.userTrackingMode = .Follow
+         mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
          mapView.rotateEnabled = self.options.headingUP
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
@@ -353,7 +381,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          
          //Map
          mapView.showsUserLocation = true
-         mapView.userTrackingMode = .Follow
+         mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
          mapView.rotateEnabled = self.options.headingUP
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
