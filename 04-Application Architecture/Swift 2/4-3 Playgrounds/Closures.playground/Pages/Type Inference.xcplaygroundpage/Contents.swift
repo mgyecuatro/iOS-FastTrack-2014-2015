@@ -51,6 +51,7 @@ theTimeNow.dynamicType
 //: **EXPERIMENT** Try removing the `String` type from the declaration of `theTimeNow`
 
 //: ### Void
+//: Remember `Void` is a data type.
 
 //: ### Example - no parameters
 let c1 = { (_ : Void) -> Void in
