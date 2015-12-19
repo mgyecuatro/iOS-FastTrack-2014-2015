@@ -85,6 +85,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
 
    ///This property is "lazy". Only runs once, when the property is first referenced
    lazy var locationManager : CLLocationManager = {
+      [unowned self] in
       print("Instantiating and initialising the location manager \"lazily\"")
       print("This will only run once")
       let loc = CLLocationManager()
