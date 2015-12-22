@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 /// A structure that encapsualtes the functionality for passing, updating and persisting the options for the Bread Crumbs app
 /// - note: If there are two copies, it is not clear if races can occur when writing userdefaults with `updateDefaults()`. It is reccomended you only call `updateDefaults()` on one copy OR if you do, call `commit()` immediately after.
@@ -53,6 +54,12 @@ struct BCOptions {
       //Note - user defaults are backed up, so can end up in an invalid state if restored on an older device
       return CLLocationManager.headingAvailable() && BCOptions.defaults.boolForKey("headingUP")
    }()
+   /// Computed property to return the user tracking mode - mutating is there becase this can cause `headingUp` to mutate
+   var userTrackingMode : MKUserTrackingMode {
+      mutating get {
+         return headingUP ? .FollowWithHeading : .Follow
+      }
+   }
    /// determines if the traffic is shown on the map
    lazy var showTraffic : Bool                  = BCOptions.defaults.boolForKey("showTraffic")
    /// distance (in meters) you must travel before another GPS location is reported. A higher value may results in extended battery time

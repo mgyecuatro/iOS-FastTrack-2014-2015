@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BackgroundTest/BCOptions.swift"
-            timestampString = "472462769.663603"
+            timestampString = "472466940.536981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "headingUP"
             landmarkType = "19">
          </BreakpointContent>

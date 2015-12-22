@@ -264,7 +264,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    
    // Moving the map will reset the user tracking mode. I reset it back
    func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
-      mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
+      mapView.userTrackingMode = self.options.userTrackingMode
    }
    
    // For drawing the bread-crumbs
@@ -364,7 +364,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          
          //Live Map
          mapView.showsUserLocation = true
-         mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
+         mapView.userTrackingMode = self.options.userTrackingMode
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
          
@@ -383,7 +383,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          
          //Map
          mapView.showsUserLocation = true
-         mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
+         mapView.userTrackingMode = self.options.userTrackingMode
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
          
