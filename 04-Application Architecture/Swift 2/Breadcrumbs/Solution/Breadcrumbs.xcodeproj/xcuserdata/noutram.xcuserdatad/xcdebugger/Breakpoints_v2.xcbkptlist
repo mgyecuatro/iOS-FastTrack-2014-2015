@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BackgroundTest/BCCurrentPositionViewController.swift"
-            timestampString = "471109203.068577"
+            timestampString = "472464705.69618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "mapView(_:rendererForOverlay:)"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "updateOutputWithState()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BackgroundTest/BCCurrentPositionViewController.swift"
-            timestampString = "471109203.068577"
+            filePath = "BackgroundTest/BCOptions.swift"
+            timestampString = "472462769.663603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "headingUP"
+            landmarkType = "19">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BackgroundTest/BCCurrentPositionViewController.swift"
+            timestampString = "472461691.623625"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "dismissWithUpdatedOptions(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

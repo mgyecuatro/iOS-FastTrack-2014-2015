@@ -16,6 +16,7 @@ protocol BCOptionsSheetDelegate : class {
 class BCOptionsTableViewController: UITableViewController {
    @IBOutlet weak var backgroundUpdateSwitch: UISwitch!
    @IBOutlet weak var headingUPSwitch: UISwitch!
+   @IBOutlet weak var headingUPLabel: UILabel!
    @IBOutlet weak var showTrafficSwitch: UISwitch!
    @IBOutlet weak var distanceSlider: UISlider!
    @IBOutlet weak var distanceLabel: UILabel!
@@ -37,7 +38,13 @@ class BCOptionsTableViewController: UITableViewController {
    //Error prone, with no clever binding strategies here - just keeping things simple
    func updateUIWithState() {
       self.backgroundUpdateSwitch.on = self.options.backgroundUpdates
-      self.headingUPSwitch.on = self.options.headingUP
+      //Only devices with heading support can switch on the heading UP support
+      if self.options.headingAvailable {
+         self.headingUPSwitch.on = self.options.headingUP
+      } else {
+         self.headingUPSwitch.enabled = false
+         self.headingUPLabel.alpha = 0.2
+      }
       self.showTrafficSwitch.on = self.options.showTraffic
       self.distanceSlider.value = Float(self.options.distanceBetweenMeasurements)
       self.distanceLabel.text = String(format: "%d", Int(self.options.distanceBetweenMeasurements))
