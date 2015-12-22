@@ -245,11 +245,11 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
       self.mapView.addOverlay(line)                      //Add updated
       
-      /// TODO: test this power saving option
-//      if (!self.deferringUpdates) {
-//         manager.allowDeferredLocationUpdatesUntilTraveled(self.options.distanceBetweenMeasurements*100.0, timeout: CLTimeIntervalMax)
-//         self.deferringUpdates = true
-//      }
+      /// Power saving option
+      if (!self.deferringUpdates) {
+         manager.allowDeferredLocationUpdatesUntilTraveled(self.options.distanceBetweenMeasurements*100.0, timeout: CLTimeIntervalMax)
+         self.deferringUpdates = true
+      }
       
    }
    
@@ -262,11 +262,12 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    // MARK: MKMapViewDelegate
    // ***********************
    
-   // Moving the map will reset the user tracking mode. I force it back
+   // Moving the map will reset the user tracking mode. I reset it back
    func mapView(mapView: MKMapView, didChangeUserTrackingMode mode: MKUserTrackingMode, animated: Bool) {
-      mapView.userTrackingMode = .Follow
+      mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
    }
    
+   // For drawing the bread-crumbs
    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
       let path = MKPolylineRenderer(overlay: overlay)
       path.strokeColor = UIColor.purpleColor()
@@ -274,6 +275,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       path.lineDashPattern = [10, 4]
       return path
    }
+   
    // **************************
    // MARK: Finite State Machine
    // **************************
@@ -345,8 +347,8 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          optionsButton.enabled = false
          
          //Map defaults (pedantic)
-         mapView.showsUserLocation = false
          mapView.delegate = nil
+         mapView.showsUserLocation = false
          
          //Location manger (pedantic)
          locationManager.stopUpdatingLocation()
@@ -363,7 +365,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          //Live Map
          mapView.showsUserLocation = true
          mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
-         mapView.rotateEnabled = self.options.headingUP
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
          
@@ -383,7 +384,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          //Map
          mapView.showsUserLocation = true
          mapView.userTrackingMode = self.options.headingUP ? .FollowWithHeading : .Follow
-         mapView.rotateEnabled = self.options.headingUP
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
          
@@ -392,6 +392,13 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          locationManager.distanceFilter = self.options.distanceBetweenMeasurements
          locationManager.allowsBackgroundLocationUpdates = self.options.backgroundUpdates
          locationManager.startUpdatingLocation()
+         
+         if CLLocationManager.headingAvailable() {
+            print("Update heading",separator: "********")
+            locationManager.startUpdatingHeading()
+         } else {
+            print("HEADING NOT AVAILABLE",separator: "********")
+         }
          
 
       } //end switch
