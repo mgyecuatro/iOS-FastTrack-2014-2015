@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D9c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -390,6 +390,7 @@
                         <outlet property="distanceSlider" destination="6UW-Z3-fCV" id="L6a-7k-bFB"/>
                         <outlet property="gpsPrecisionLabel" destination="jAa-dU-coR" id="K6B-JO-mZF"/>
                         <outlet property="gpsPrecisionSlider" destination="45i-2v-jNL" id="KT7-0j-tb6"/>
+                        <outlet property="headingUPLabel" destination="PCN-IB-n3V" id="eXf-qH-Ti9"/>
                         <outlet property="headingUPSwitch" destination="oHe-FJ-AS4" id="O2k-Nc-giT"/>
                         <outlet property="showTrafficSwitch" destination="a28-eM-UNw" id="Eb3-UF-VW8"/>
                     </connections>
