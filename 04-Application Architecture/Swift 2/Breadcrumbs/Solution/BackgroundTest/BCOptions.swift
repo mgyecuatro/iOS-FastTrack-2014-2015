@@ -36,7 +36,7 @@ struct BCOptions {
    
    ///Access the standardUserDefaults via this property to ensure factory settings (registration domain) are initialised.
    ///In the event that no userdefaults have been set yet, it will fall back the factory default.
-   static var defaults : NSUserDefaults = {
+   static let defaults : NSUserDefaults = {
       //Initiaised lazily (in part because it is static) using a closure.
       let ud = NSUserDefaults.standardUserDefaults()
       ud.registerDefaults(BCOptions.defaultsDictionary)

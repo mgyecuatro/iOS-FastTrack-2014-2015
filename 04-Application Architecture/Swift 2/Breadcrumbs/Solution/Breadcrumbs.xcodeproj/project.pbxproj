@@ -15,6 +15,7 @@
 		078598EC1C0C467A00807E6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078598EA1C0C467A00807E6A /* Main.storyboard */; };
 		078598EE1C0C467A00807E6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 078598ED1C0C467A00807E6A /* Assets.xcassets */; };
 		078598F11C0C467A00807E6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078598EF1C0C467A00807E6A /* LaunchScreen.storyboard */; };
+		07CDA5591C37A72B0077CFAC /* factoryDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07CDA5581C37A72B0077CFAC /* factoryDefaults.plist */; };
 		07D0E4431C0C608800291F5F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D0E4421C0C608800291F5F /* CoreLocation.framework */; };
 		07D650141C0C880D00A7801D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D650131C0C880D00A7801D /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		078598ED1C0C467A00807E6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		078598F01C0C467A00807E6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		078598F21C0C467A00807E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07CDA5581C37A72B0077CFAC /* factoryDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = factoryDefaults.plist; sourceTree = "<group>"; };
 		07D0E4421C0C608800291F5F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D650131C0C880D00A7801D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				078598ED1C0C467A00807E6A /* Assets.xcassets */,
 				078598EF1C0C467A00807E6A /* LaunchScreen.storyboard */,
 				078598F21C0C467A00807E6A /* Info.plist */,
+				07CDA5581C37A72B0077CFAC /* factoryDefaults.plist */,
 			);
 			path = BackgroundTest;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				078598F11C0C467A00807E6A /* LaunchScreen.storyboard in Resources */,
 				078598EE1C0C467A00807E6A /* Assets.xcassets in Resources */,
 				078598EC1C0C467A00807E6A /* Main.storyboard in Resources */,
+				07CDA5591C37A72B0077CFAC /* factoryDefaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
