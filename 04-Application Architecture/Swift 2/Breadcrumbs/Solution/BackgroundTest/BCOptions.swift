@@ -21,17 +21,22 @@ struct BCOptions {
    //Swift types Bool and Float will be bridged automatically to Foundation class types
    
    /// Factory defaults - if no user default is set, these will be used
-   static let defaultsDictionary : [String : AnyObject] = [
-      "backgroundUpdates" : false,
-      "headingUP" : false,
-      "showTraffic" : false,
-      "distanceBetweenMeasurements" : 100.0,
-      "gpsPrecision" : 10.0
-   ]
+//   static let defaultsDictionary : [String : AnyObject] = [
+//      "backgroundUpdates" : false,
+//      "headingUP" : false,
+//      "showTraffic" : false,
+//      "distanceBetweenMeasurements" : 100.0,
+//      "gpsPrecision" : 10.0
+//   ]
+   //Read key-value pairs from a plist file
+   static let defaultsDictionary : [String : AnyObject] = {
+      let fp = NSBundle.mainBundle().pathForResource("factoryDefaults", ofType: "plist")
+      return NSDictionary(contentsOfFile: fp!) as! [String : AnyObject]
+   }()
    
    ///Access the standardUserDefaults via this property to ensure factory settings (registration domain) are initialised.
    ///In the event that no userdefaults have been set yet, it will fall back the factory default.
-   static var defaults : NSUserDefaults = { () -> NSUserDefaults in
+   static var defaults : NSUserDefaults = {
       //Initiaised lazily (in part because it is static) using a closure.
       let ud = NSUserDefaults.standardUserDefaults()
       ud.registerDefaults(BCOptions.defaultsDictionary)
