@@ -27,15 +27,20 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          self = .WaitingForViewDidLoad
       }
       
-      /// Returns a dictionary with a string description of a state
-      func dict() -> [AppState : String] {
-         let dict : [AppState : String] = [
-            .WaitingForViewDidLoad : "Wating for ViewDidLoad",
-            .RequestingAuth        : "Requesting Authorisation",
-            .LiveMapNoLogging      : "Live Map with no location logging",
-            .LiveMapLogging        : "Live Map with location Logging"
-         ]
-         return dict
+      /// Returns a string description of a state using a computed property. Used by the print function when logging.
+      var description : String {
+         get {
+            switch (self) {
+            case .WaitingForViewDidLoad:
+               return "Wating for ViewDidLoad"
+            case .RequestingAuth:
+               return "Requesting Authorisation"
+            case .LiveMapNoLogging:
+               return "Live Map with no location logging"
+            case .LiveMapLogging:
+               return "Live Map with location Logging"
+            }
+         }
       }
    }
    
@@ -65,9 +70,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    private var state : AppState     = AppState() {
       willSet {
          //Useful logging info
-         if let strOldState = state.dict()[state], strNewState = state.dict()[newValue] where strOldState != strNewState {
-            print("Changing from state \(strOldState) to state \"\(strNewState)\"")
-         }
+         print("Changing from state \(state) to state \"\(newValue)\"")
       }
       didSet {
          //If the state changes, so the output changes immediately
