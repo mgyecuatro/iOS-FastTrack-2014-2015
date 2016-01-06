@@ -145,17 +145,29 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    }
    
    override func viewWillAppear(animated: Bool) {
+      super.viewWillAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
    }
    override func viewDidAppear(animated: Bool) {
+      super.viewDidAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
    }
-   
+   // MARK: Updates to layout
+   override func viewWillLayoutSubviews() {
+      super.viewWillLayoutSubviews()
+      print("\(__FILE__), \(__FUNCTION__)")
+   }
+   override func viewDidLayoutSubviews() {
+      super.viewDidLayoutSubviews()
+      print("\(__FILE__), \(__FUNCTION__)")
+   }
    // MARK: Tearing the controller down
    override func viewWillDisappear(animated: Bool) {
+      super.viewWillDisappear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
    }
    override func viewDidDisappear(animated: Bool) {
+      super.viewDidDisappear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
    }
    deinit {

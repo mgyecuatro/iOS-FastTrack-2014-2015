@@ -21,14 +21,7 @@ struct BCOptions {
    //Swift types Bool and Float will be bridged automatically to Foundation class types
    
    /// Factory defaults - if no user default is set, these will be used
-//   static let defaultsDictionary : [String : AnyObject] = [
-//      "backgroundUpdates" : false,
-//      "headingUP" : false,
-//      "showTraffic" : false,
-//      "distanceBetweenMeasurements" : 100.0,
-//      "gpsPrecision" : 10.0
-//   ]
-   //Read key-value pairs from a plist file
+   //  Read key-value pairs from a plist file
    static let defaultsDictionary : [String : AnyObject] = {
       let fp = NSBundle.mainBundle().pathForResource("factoryDefaults", ofType: "plist")
       return NSDictionary(contentsOfFile: fp!) as! [String : AnyObject]

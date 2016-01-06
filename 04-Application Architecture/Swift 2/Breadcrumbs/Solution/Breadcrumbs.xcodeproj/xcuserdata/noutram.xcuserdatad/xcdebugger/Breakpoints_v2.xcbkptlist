@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BackgroundTest/BCCurrentPositionViewController.swift"
-            timestampString = "473413627.407497"
+            timestampString = "473795398.606417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "updateOutputWithState()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BackgroundTest/BCCurrentPositionViewController.swift"
-            timestampString = "473413627.407497"
+            timestampString = "473795398.606417"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "dismissWithUpdatedOptions(_:)"
             landmarkType = "5">
          </BreakpointContent>
