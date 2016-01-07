@@ -7,6 +7,7 @@
         <page name='Capturing and Currying'/>
         <page name='Call backs'/>
         <page name='Creating Asychonous APIs'/>
+        <page name='Creating Asynchrnoous API&apos;s with CGD'/>
         <page name='Retain Cycles'/>
     </pages>
 </playground>
