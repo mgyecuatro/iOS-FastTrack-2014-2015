@@ -10,38 +10,48 @@ import UIKit
 import CoreLocation
 
 class BCModel: NSObject, NSCoding {
-   private var arrayOfLocations = [CLLocation]()
-   let archivePath = pathForDocument("locations")
+   private var arrayOfLocations : [CLLocation]
+   private let archivePath = pathToFileInDocumentsFolder("locations")
+   private let queue : dispatch_queue_t = dispatch_queue_create("uk.ac.plmouth.bc", DISPATCH_QUEUE_SERIAL)
+   private let archiveKey = "LocationArray"
    
-   required init?(coder aDecoder: NSCoder) {
-      //Stage 2 initialisation
+   init(withArray a : [CLLocation]) {
+      arrayOfLocations = a
       super.init()
+   }
+   
+   required convenience init?(coder aDecoder: NSCoder) {
       
       //Decode if possible
-      guard let arr = aDecoder.decodeObjectForKey("Locations") as? [CLLocation] else {
+      guard let arr = aDecoder.decodeObjectForKey("LocationArray") as? [CLLocation] else {
          return nil
       }
-      arrayOfLocations = arr
+      
+      self.init(withArray: arr)
    }
    
    /// Encodes the data in one step
    func encodeWithCoder(aCoder: NSCoder) {
-      aCoder.encodeObject(arrayOfLocations, forKey: "Locations")
+      aCoder.encodeObject(arrayOfLocations, forKey: "LocationArray")
    }
    
-   /// Add location to the array
-   func save()
+   /// Save the array to persistant storage (simple method)
+   func save(done done : ()->() )
    {
-      guard let path = archivePath else {
-         return
+      //Save on a background thread - note this is a serial queue, so multiple calls to save will be performed
+      //in strict sequence (to avoid races)
+      dispatch_async(queue) {
+         //Persist data to file
+         NSKeyedArchiver.archiveRootObject(self, toFile:self.archivePath)
+         //Call back on main thread (posted to main runloop)
+         dispatch_async(dispatch_get_main_queue(), done)
       }
-      
-      //Save on a background thread
-      let q : dispatch_queue_t  = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-      dispatch_async(q) {
-         NSKeyedArchiver.archiveRootObject(self, toFile:path)
-      }
-         
+   }
+   
+   // Erase all data
+   func erase() {
+      arrayOfLocations.removeAll()
+      save(done: { })
    }
    
 }
