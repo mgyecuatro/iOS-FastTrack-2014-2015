@@ -18,6 +18,7 @@
 		07CDA5591C37A72B0077CFAC /* factoryDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07CDA5581C37A72B0077CFAC /* factoryDefaults.plist */; };
 		07D0E4431C0C608800291F5F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D0E4421C0C608800291F5F /* CoreLocation.framework */; };
 		07D650141C0C880D00A7801D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07D650131C0C880D00A7801D /* MapKit.framework */; };
+		07F21C861C3E8E8600AEC428 /* BCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F21C851C3E8E8600AEC428 /* BCModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		07CDA5581C37A72B0077CFAC /* factoryDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = factoryDefaults.plist; sourceTree = "<group>"; };
 		07D0E4421C0C608800291F5F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D650131C0C880D00A7801D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		07F21C851C3E8E8600AEC428 /* BCModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				07632AFA1C11B7C20072A43F /* BCGlobals.swift */,
 				07632AF81C11A5B70072A43F /* BCOptions.swift */,
 				078598E61C0C467A00807E6A /* AppDelegate.swift */,
+				07F21C851C3E8E8600AEC428 /* BCModel.swift */,
 				078598E81C0C467A00807E6A /* BCCurrentPositionViewController.swift */,
 				076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */,
 				078598EA1C0C467A00807E6A /* Main.storyboard */,
@@ -169,6 +172,7 @@
 				076805C11C0F35B70029701C /* BCOptionsTableViewController.swift in Sources */,
 				078598E71C0C467A00807E6A /* AppDelegate.swift in Sources */,
 				07632AFB1C11B7C20072A43F /* BCGlobals.swift in Sources */,
+				07F21C861C3E8E8600AEC428 /* BCModel.swift in Sources */,
 				07632AF91C11A5B70072A43F /* BCOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
