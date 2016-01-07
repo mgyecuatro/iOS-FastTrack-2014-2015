@@ -143,7 +143,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       //Set initial app state - this kicks off everything else
       self.updateStateWithInput(.Start)
    }
-   
    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
