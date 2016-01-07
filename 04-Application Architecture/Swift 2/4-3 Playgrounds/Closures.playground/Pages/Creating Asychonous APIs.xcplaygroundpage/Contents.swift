@@ -123,9 +123,9 @@ func synchronousHillClimbWithInitialValue(var x0 : Double, 𝛌 : Double, maxIte
    return (x:x0, y:fn(x0))
 }
 
-//: Create a queue (separate thread) where all tasks can run concurrently
-let q = dispatch_queue_create("calc", DISPATCH_QUEUE_CONCURRENT)
-
+//: Create / obtain a queue (separate thread) where all tasks can run concurrently
+//let q = dispatch_queue_create("calc", DISPATCH_QUEUE_CONCURRENT)   //Creates a new queue
+let q = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)   //Use an existing (from the global pool)
 //: Dispatch the task on the queue
 dispatch_async(q){
    //Call the (computationally intensive) function
@@ -137,6 +137,8 @@ dispatch_async(q){
       } else {
          print("GCD: Did not converge")
       }
+      //This next line is just to stop the Playground Executing forever
+      XCPlaygroundPage.currentPage.finishExecution()
    }
 }
 
