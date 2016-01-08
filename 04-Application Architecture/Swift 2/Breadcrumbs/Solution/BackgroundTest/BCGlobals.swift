@@ -7,13 +7,13 @@
 //
 
 import Foundation
-let globalDocumentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first
+let pathToDocumentsFolder : String = {
+   let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+   return paths[0]
+}()
 
-func pathForDocument(filename : String) -> String? {
-   guard let gPath = globalDocumentsPath else {
-      return nil
-   }
-   
-   return NSString(string: gPath).stringByAppendingPathComponent(filename) as String
+let pathToFileInDocumentsFolder = { (fileName : String) -> String in
+   return (pathToDocumentsFolder as NSString).stringByAppendingPathComponent(fileName)
 }
+
 //let globalPath = globalDocumentsPath?.stringByAppendingString("/Options")
