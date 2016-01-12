@@ -9,9 +9,11 @@
 import UIKit
 import CoreLocation
 
-class BCModel: NSObject, NSCoding {
+let globalModel : BCModel = BCModel.modelFromArchive()
+
+final class BCModel: NSObject, NSCoding {
+   static let archivePath = pathToFileInDocumentsFolder("locations")
    private var arrayOfLocations = [CLLocation]()
-   private let archivePath = pathToFileInDocumentsFolder("locations")
    private let queue : dispatch_queue_t = dispatch_queue_create("uk.ac.plmouth.bc", DISPATCH_QUEUE_SERIAL)
    private let archiveKey = "LocationArray"
    
@@ -21,8 +23,16 @@ class BCModel: NSObject, NSCoding {
 //      super.init()
 //   }
    
-   // MARK: NSCoding
+   // Static function to return an initialised object - similar to a conveneince initialiser.
+   private static func modelFromArchive() -> BCModel {
+      
+      guard let m = NSKeyedUnarchiver.unarchiveObjectWithFile(BCModel.archivePath) as? BCModel else {
+         return BCModel()
+      }
+      return m
+   }
    
+   // MARK: NSCoding
    required convenience init?(coder aDecoder: NSCoder) {
       //Nothing to do in phase 1
       
@@ -43,12 +53,12 @@ class BCModel: NSObject, NSCoding {
    
    // MARK: Public API
    
-   // All these methods are serialsed on a background thread. None can preempt the other.
-   // For example, if save is called multiple times, each save operation will complete before
-   // the next is allowed to start.
+   // All these methods are serialsed on a background thread. KEY POINT: None can preempt the other.
+   // For example, if save is called multiple times, each save operation will complete before the next is allowed to start.
+   //
    // Furthermore, if an addRecord is called, but there is a save in front, this could take a significant time.
-   // As everthing is queues on a separate thread, there is no risk of blocking the main thread.
-   // Each methods invokes a closure on the main thread when completed
+   // As everthing is queued on a separate thread, there is no risk of blocking the main thread.
+   // Each method invokes a closure on the main thread when completed
    
    /// Save the array to persistant storage (simple method) serialised on a background thread
    func save(done done : ()->() )
@@ -57,7 +67,7 @@ class BCModel: NSObject, NSCoding {
       //in strict sequence (to avoid races)
       dispatch_async(queue) {
          //Persist data to file
-         NSKeyedArchiver.archiveRootObject(self, toFile:self.archivePath)
+         NSKeyedArchiver.archiveRootObject(self, toFile:BCModel.archivePath)
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
       }
