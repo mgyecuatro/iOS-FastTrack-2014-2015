@@ -6,50 +6,34 @@
 //  Copyright © 2016 Plymouth University. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import CoreLocation
 
-let globalModel : BCModel = BCModel.modelFromArchive()
+//Simple singleton model
+let globalModel : BCModel = BCModel()
 
-final class BCModel: NSObject, NSCoding {
-   static let archivePath = pathToFileInDocumentsFolder("locations")
+final class BCModel {
+   private let archivePath = pathToFileInDocumentsFolder("locations")
    private var arrayOfLocations = [CLLocation]()
    private let queue : dispatch_queue_t = dispatch_queue_create("uk.ac.plmouth.bc", DISPATCH_QUEUE_SERIAL)
    private let archiveKey = "LocationArray"
    
    // MARK: Life-cycle
    
-//   override init() {
+   private init() {
+      //Phase 1 has nothing to do
+      
+      //Call superclass if you subclass
 //      super.init()
-//   }
-   
-   // Static function to return an initialised object - similar to a conveneince initialiser.
-   private static func modelFromArchive() -> BCModel {
       
-      guard let m = NSKeyedUnarchiver.unarchiveObjectWithFile(BCModel.archivePath) as? BCModel else {
-         return BCModel()
+      //Phase 2 - super is now available
+      if let m = NSKeyedUnarchiver.unarchiveObjectWithFile(self.archivePath) as? [CLLocation] {
+         arrayOfLocations = m
+      } else {
+         arrayOfLocations = [CLLocation]()
       }
-      return m
    }
    
-   // MARK: NSCoding
-   required convenience init?(coder aDecoder: NSCoder) {
-      //Nothing to do in phase 1
-      
-      //Pass accross to the designated initialiser
-      self.init()
-      
-      //Decode if possible
-      guard let arr = aDecoder.decodeObjectForKey(archiveKey) as? [CLLocation] else {
-         return nil
-      }
-      arrayOfLocations = arr
-   }
-
-   // Encodes the data in one step
-   func encodeWithCoder(aCoder: NSCoder) {
-      aCoder.encodeObject(arrayOfLocations, forKey: archiveKey)
-   }
    
    // MARK: Public API
    
@@ -67,7 +51,7 @@ final class BCModel: NSObject, NSCoding {
       //in strict sequence (to avoid races)
       dispatch_async(queue) {
          //Persist data to file
-         NSKeyedArchiver.archiveRootObject(self, toFile:BCModel.archivePath)
+         NSKeyedArchiver.archiveRootObject(self.arrayOfLocations, toFile:self.archivePath)
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
       }
@@ -79,7 +63,6 @@ final class BCModel: NSObject, NSCoding {
          self.arrayOfLocations.removeAll()
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
-         
       }
    }
    
@@ -91,5 +74,27 @@ final class BCModel: NSObject, NSCoding {
          dispatch_async(dispatch_get_main_queue(), done)
       }
    }
+   
+   /// Add an array of records
+   func addRecords(records : [CLLocation], done : ()->() ) {
+      dispatch_async(queue){
+         for r in records {
+            self.arrayOfLocations.append(r)
+         }
+         //Call back on main thread (posted to main runloop)
+         dispatch_async(dispatch_get_main_queue(), done)
+      }
+   }
+   
+   /// Thread-safe read access
+   func getArray(done done : (array : [CLLocation]) -> () ) {
+      var copyOfArray : [CLLocation]!
+      dispatch_async(queue){
+         //Call back on main thread (posted to main runloop)
+         copyOfArray = self.arrayOfLocations
+         dispatch_async(dispatch_get_main_queue(), { done(array: copyOfArray) })
+      }
+   }
+   
    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0744586F1C40367600D398B2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0744586E1C40367600D398B2 /* CloudKit.framework */; };
 		07632AF91C11A5B70072A43F /* BCOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07632AF81C11A5B70072A43F /* BCOptions.swift */; };
 		07632AFB1C11B7C20072A43F /* BCGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07632AFA1C11B7C20072A43F /* BCGlobals.swift */; };
 		076805C11C0F35B70029701C /* BCOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0744586D1C40366F00D398B2 /* Breadcrumbs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Breadcrumbs.entitlements; sourceTree = "<group>"; };
+		0744586E1C40367600D398B2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		07632AF81C11A5B70072A43F /* BCOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCOptions.swift; sourceTree = "<group>"; };
 		07632AFA1C11B7C20072A43F /* BCGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCGlobals.swift; sourceTree = "<group>"; };
 		076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCOptionsTableViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0744586F1C40367600D398B2 /* CloudKit.framework in Frameworks */,
 				07D650141C0C880D00A7801D /* MapKit.framework in Frameworks */,
 				07D0E4431C0C608800291F5F /* CoreLocation.framework in Frameworks */,
 			);
@@ -54,6 +58,8 @@
 		078598DA1C0C467A00807E6A = {
 			isa = PBXGroup;
 			children = (
+				0744586E1C40367600D398B2 /* CloudKit.framework */,
+				0744586D1C40366F00D398B2 /* Breadcrumbs.entitlements */,
 				07D650131C0C880D00A7801D /* MapKit.framework */,
 				07D0E4421C0C608800291F5F /* CoreLocation.framework */,
 				078598E51C0C467A00807E6A /* BackgroundTest */,
@@ -72,10 +78,10 @@
 		078598E51C0C467A00807E6A /* BackgroundTest */ = {
 			isa = PBXGroup;
 			children = (
+				07F21C851C3E8E8600AEC428 /* BCModel.swift */,
 				07632AFA1C11B7C20072A43F /* BCGlobals.swift */,
 				07632AF81C11A5B70072A43F /* BCOptions.swift */,
 				078598E61C0C467A00807E6A /* AppDelegate.swift */,
-				07F21C851C3E8E8600AEC428 /* BCModel.swift */,
 				078598E81C0C467A00807E6A /* BCCurrentPositionViewController.swift */,
 				076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */,
 				078598EA1C0C467A00807E6A /* Main.storyboard */,
@@ -125,6 +131,9 @@
 								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -286,11 +295,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Breadcrumbs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BackgroundTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.plymouth.BackgroundTest;
 				PRODUCT_NAME = Breadcrumbs;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -299,11 +311,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Breadcrumbs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BackgroundTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.ac.plymouth.BackgroundTest;
 				PRODUCT_NAME = Breadcrumbs;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

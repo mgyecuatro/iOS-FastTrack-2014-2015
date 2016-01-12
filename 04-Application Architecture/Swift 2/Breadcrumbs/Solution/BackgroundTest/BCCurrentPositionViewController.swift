@@ -110,7 +110,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    var deferringUpdates : Bool = false
    
    //Array of GPS locations
-   var arrayOfLocations = [CLLocation]()
+   var _arrayOfLocations = [CLLocation]()
    
    // ************************
    // MARK: Class Initialisers
@@ -234,6 +234,21 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       }
    }
    
+   // ************************
+   // MARK: Update Map Overlay
+   // ************************
+   func updateMapOverlay() {
+      globalModel.getArray() { (array : [CLLocation]) in
+         self._arrayOfLocations = array
+         
+         //Update overlay of the journey
+         var arrayOfCoords : [CLLocationCoordinate2D] = self._arrayOfLocations.map{$0.coordinate}  //Array of coordinates
+         let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
+         self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
+         self.mapView.addOverlay(line)                      //Add updated
+      }
+   }
+   
    
    // *******************************
    // MARK: CLLocationManagerDelegate
@@ -249,15 +264,10 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       print("\(locations.count) Location(s) Updated: \(location)")
 
       //Store in array
-      for loc in locations {
-         self.arrayOfLocations.append(loc)
+      globalModel.addRecords(locations) {
+         //Update overlay of the journey
+         self.updateMapOverlay()
       }
-      
-      //Update overlay of the journey
-      var arrayOfCoords : [CLLocationCoordinate2D] = arrayOfLocations.map{$0.coordinate}  //Array of coordinates
-      let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
-      self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
-      self.mapView.addOverlay(line)                      //Add updated
       
       /// Power saving option
       if (!self.deferringUpdates) {
@@ -381,6 +391,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          mapView.userTrackingMode = self.options.userTrackingMode
          mapView.showsTraffic = self.options.showTraffic
          mapView.delegate = self
+         updateMapOverlay()
          
          //Set Location manger state
          locationManager.desiredAccuracy = self.options.gpsPrecision
@@ -388,6 +399,8 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          locationManager.allowsBackgroundLocationUpdates = false
          locationManager.stopUpdatingLocation()
          
+         //Save model when ever we enter this state
+         globalModel.save(done: { })
          
       case .LiveMapLogging:
          //Buttons
