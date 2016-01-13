@@ -15,5 +15,3 @@ let pathToDocumentsFolder : String = {
 let pathToFileInDocumentsFolder = { (fileName : String) -> String in
    return (pathToDocumentsFolder as NSString).stringByAppendingPathComponent(fileName)
 }
-
-//let globalPath = globalDocumentsPath?.stringByAppendingString("/Options")
