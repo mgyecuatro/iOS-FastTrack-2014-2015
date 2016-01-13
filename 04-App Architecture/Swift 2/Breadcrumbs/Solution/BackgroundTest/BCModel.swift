@@ -8,11 +8,15 @@
 
 import Foundation
 import CoreLocation
+import CloudKit
 
 //Simple singleton model
 let globalModel : BCModel = BCModel()
 
 final class BCModel {
+   // CloudKit database
+   let publicDB = CKContainer.defaultContainer().publicCloudDatabase
+   
    private let archivePath = pathToFileInDocumentsFolder("locations")
    private var arrayOfLocations = [CLLocation]()
    private let queue : dispatch_queue_t = dispatch_queue_create("uk.ac.plmouth.bc", DISPATCH_QUEUE_SERIAL)
@@ -108,5 +112,51 @@ final class BCModel {
          dispatch_async(dispatch_get_main_queue(), { done(isEmpty: result) })
       }
    }
+   
+   /// CLOUDKIT (very basic, assumes non-failure)
+   
+   /// Upload the array of data to CloudKit
+   func uploadToCloudKit(done : (didSucceed : Bool)->() ) {
+      //Fetch a copy of the array
+      getArray() { (array : [CLLocation]) in
+         //Back on the main thread
+         let record = CKRecord(recordType: "Locations")
+         record.setObject("My Only Route", forKey: "title")
+         record.setObject(array, forKey: "route")
+         self.publicDB.saveRecord(record) { (rec : CKRecord?, err: NSError?) in
+            if let _ = err {
+               done(didSucceed: false)
+            } else {
+               done(didSucceed: true)
+            }
+         }
+      }
+   }
+   
+   //Delete records from cloudkit
+   func deleteDataFromCloudKit(done : (didSucceed : Bool)->() ) {
+      let p = NSPredicate(format: "title == %@", "My Only Route")
+      let query = CKQuery(recordType: "Locations", predicate: p)
+      publicDB.performQuery(query, inZoneWithID: nil) { (results : [CKRecord]?, error : NSError?) in
+         if let _ = error {
+            done(didSucceed: false)
+            return
+         }
+         guard let res = results else {
+            done(didSucceed: false)
+            return
+         }
+         for r : CKRecord in res {
+            self.publicDB.deleteRecordWithID(r.recordID) { r, err in
+               if let _ = err {
+                  done(didSucceed: false)
+                  return
+               }
+            }
+         }
+         done(didSucceed: true)
+      }
+   }
+   
    
 }

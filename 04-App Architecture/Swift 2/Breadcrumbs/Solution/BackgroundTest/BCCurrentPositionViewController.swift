@@ -199,11 +199,23 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    }
 
    @IBAction func doStop(sender: AnyObject) {
+      //Save model when ever we enter this state
+      globalModel.save() {
+         //Upload to CloudKit
+         globalModel.uploadToCloudKit() { (didSucceed : Bool) in
+            // TBD: This really needs a better state model
+            print("Successful upload: \(didSucceed)")
+         }
+      }
+      //Update UI
       self.updateStateWithInput(.UserWantsToStart(false))
    }
    
    @IBAction func doClear(sender: AnyObject) {
       globalModel.erase() {
+         globalModel.deleteDataFromCloudKit() { (didSucceed : Bool) in
+            print("Data delete \(didSucceed)")
+         }
          self.updateStateWithInput(.None)
       }
    }
@@ -346,9 +358,11 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       
       case .LiveMapLogging:
          
+         //Check for user cancelling permission
          if case .AuthorisationStatus(let val) = ip where val == false {
             nextState = .RequestingAuth
          }
+         //Check for stop button
          else if case .UserWantsToStart(let val) = ip where val == false {
             nextState = .LiveMapNoLogging
          }
@@ -409,9 +423,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          locationManager.distanceFilter = self.options.distanceBetweenMeasurements
          locationManager.allowsBackgroundLocationUpdates = false
          locationManager.stopUpdatingLocation()
-         
-         //Save model when ever we enter this state
-         globalModel.save(done: { })
          
       case .LiveMapLogging:
          //Buttons
