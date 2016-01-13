@@ -31,6 +31,11 @@
                                             <action selector="doStop:" destination="BYZ-38-t0r" id="Ttj-0G-P9y"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem enabled="NO" title="Clear" id="Zoa-ge-4Ly">
+                                        <connections>
+                                            <action selector="doClear:" destination="BYZ-38-t0r" id="D18-Jm-kuG"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="N7w-al-ZLv"/>
                                     <barButtonItem title="Options" id="Ejk-JJ-Tgx">
                                         <connections>
@@ -55,6 +60,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="clearButton" destination="Zoa-ge-4Ly" id="ZoU-28-hNZ"/>
                         <outlet property="mapView" destination="zaq-Cs-AVs" id="WZi-e5-4aR"/>
                         <outlet property="optionsButton" destination="Ejk-JJ-Tgx" id="Zd0-ux-tGL"/>
                         <outlet property="startButton" destination="XJO-Zo-YHi" id="rUx-26-UD9"/>

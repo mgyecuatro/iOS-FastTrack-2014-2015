@@ -17,6 +17,7 @@ final class BCModel {
    private var arrayOfLocations = [CLLocation]()
    private let queue : dispatch_queue_t = dispatch_queue_create("uk.ac.plmouth.bc", DISPATCH_QUEUE_SERIAL)
    private let archiveKey = "LocationArray"
+   private var _isEmpty : Bool = true
    
    // MARK: Life-cycle
    
@@ -61,6 +62,7 @@ final class BCModel {
    func erase(done done : ()->() ) {
       dispatch_async(queue) {
          self.arrayOfLocations.removeAll()
+         self._isEmpty = true
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
       }
@@ -70,6 +72,7 @@ final class BCModel {
    func addRecord(record : CLLocation, done : ()->() ) {
       dispatch_async(queue){
          self.arrayOfLocations.append(record)
+         self._isEmpty = false
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
       }
@@ -81,6 +84,7 @@ final class BCModel {
          for r in records {
             self.arrayOfLocations.append(r)
          }
+         self._isEmpty = false
          //Call back on main thread (posted to main runloop)
          dispatch_async(dispatch_get_main_queue(), done)
       }
@@ -96,5 +100,13 @@ final class BCModel {
       }
    }
    
+   /// Query if the container is empty
+   func isEmpty(done done : (isEmpty : Bool) -> () ) {
+      var result : Bool!
+      dispatch_async(queue) {
+         result = self._isEmpty
+         dispatch_async(dispatch_get_main_queue(), { done(isEmpty: result) })
+      }
+   }
    
 }

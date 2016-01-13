@@ -58,6 +58,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    
    @IBOutlet weak var startButton: UIBarButtonItem!
    @IBOutlet weak var stopButton: UIBarButtonItem!
+   @IBOutlet weak var clearButton: UIBarButtonItem!
    @IBOutlet weak var optionsButton: UIBarButtonItem!
    @IBOutlet weak var mapView: MKMapView!
 
@@ -199,6 +200,12 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
 
    @IBAction func doStop(sender: AnyObject) {
       self.updateStateWithInput(.UserWantsToStart(false))
+   }
+   
+   @IBAction func doClear(sender: AnyObject) {
+      globalModel.erase() {
+         self.updateStateWithInput(.None)
+      }
    }
    
    //Called before a segue performs navigation
@@ -366,8 +373,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          //Set UI into default state until authorised
          
          //Buttons
-         startButton.enabled = false
-         stopButton.enabled = false
+         startButton.enabled   = false
+         stopButton.enabled    = false
+         clearButton.enabled   = false
          optionsButton.enabled = false
          
          //Map defaults (pedantic)
@@ -385,6 +393,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          startButton.enabled = true
          stopButton.enabled = false
          optionsButton.enabled = true
+         globalModel.isEmpty() {
+            self.clearButton.enabled = !$0
+         }
          
          //Live Map
          mapView.showsUserLocation = true
@@ -404,8 +415,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          
       case .LiveMapLogging:
          //Buttons
-         startButton.enabled = false
-         stopButton.enabled = true
+         startButton.enabled   = false
+         stopButton.enabled    = true
+         clearButton.enabled   = false
          optionsButton.enabled = true
          
          //Map
