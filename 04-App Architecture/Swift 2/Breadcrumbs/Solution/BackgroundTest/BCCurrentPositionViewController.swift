@@ -12,12 +12,12 @@ import MapKit
 
 class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, BCOptionsSheetDelegate {
 
-   // **********************
-   // MARK: Enumerated types
-   // **********************
-   
-   /// The application state - "where we are in a known sequence"
-   enum AppState {
+    // **********************
+    // MARK: Enumerated types
+    // **********************
+
+    /// The application state - "where we are in a known sequence"
+    enum AppState {
       case WaitingForViewDidLoad
       case RequestingAuth
       case LiveMapNoLogging
@@ -42,33 +42,33 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
             }
          }
       }
-   }
-   
-   /// The type of input (and its value) applied to the state machine
-   enum AppStateInputSource {
+    }
+
+    /// The type of input (and its value) applied to the state machine
+    enum AppStateInputSource {
       case None
       case Start
       case AuthorisationStatus(Bool)
       case UserWantsToStart(Bool)
-   }
-   
-   // *************
-   // MARK: Outlets
-   // *************
-   
-   @IBOutlet weak var startButton: UIBarButtonItem!
-   @IBOutlet weak var stopButton: UIBarButtonItem!
-   @IBOutlet weak var clearButton: UIBarButtonItem!
-   @IBOutlet weak var optionsButton: UIBarButtonItem!
-   @IBOutlet weak var mapView: MKMapView!
+    }
 
-   // ****************
-   // MARK: Properties
-   // ****************
+    // *************
+    // MARK: Outlets
+    // *************
    
-   /// Appliction state. Important to manage the possible sequence of events that can occur in an app life cycle
-   /// - warning: Should only be set via the `updateStateWithInput()` method
-   private var state : AppState     = AppState() {
+    @IBOutlet weak var startButton: UIBarButtonItem!
+    @IBOutlet weak var stopButton: UIBarButtonItem!
+    @IBOutlet weak var clearButton: UIBarButtonItem!
+    @IBOutlet weak var optionsButton: UIBarButtonItem!
+    @IBOutlet weak var mapView: MKMapView!
+
+    // ****************
+    // MARK: Properties
+    // ****************
+
+    /// Appliction state. Important to manage the possible sequence of events that can occur in an app life cycle
+    /// - warning: Should only be set via the `updateStateWithInput()` method
+    private var state : AppState     = AppState() {
       willSet {
          //Useful logging info
          print("Changing from state \(state) to state \"\(newValue)\"")
@@ -77,18 +77,18 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          //If the state changes, so the output changes immediately
          self.updateOutputWithState()
       }
-   }
-   
-   ///Default set of options (backed by user defaults)
-   private var options : BCOptions = BCOptions() {
+    }
+
+    ///Default set of options (backed by user defaults)
+    private var options : BCOptions = BCOptions() {
       didSet {
          //Persist the options to user defaults
          options.updateDefaults()
       }
-   }
+    }
 
-   ///This property is "lazy". Only runs once, when the property is first referenced
-   lazy var locationManager : CLLocationManager = {
+    ///This property is "lazy". Only runs once, when the property is first referenced
+    lazy var locationManager : CLLocationManager = {
       [unowned self] in
       print("Instantiating and initialising the location manager \"lazily\"")
       print("This will only run once")
@@ -105,75 +105,85 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       loc.allowsBackgroundLocationUpdates = false
       
       return loc
-   }()               //Note the parenthesis
+    }()               //Note the parenthesis
+
+    //Internal flag for deferred updates
+    var deferringUpdates : Bool = false
+
+    //Array of GPS locations
+    var _arrayOfLocations = [CLLocation]()
    
-   //Internal flag for deferred updates
-   var deferringUpdates : Bool = false
-   
-   //Array of GPS locations
-   var _arrayOfLocations = [CLLocation]()
-   
-   // ************************
-   // MARK: Class Initialisers
-   // ************************
-   
-   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    // ************************
+    // MARK: Class Initialisers
+    // ************************
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
       print("\(__FILE__), \(__FUNCTION__)")
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-   }
-   required init?(coder aDecoder: NSCoder) {
+    }
+    required init?(coder aDecoder: NSCoder) {
       print("\(__FILE__), \(__FUNCTION__)")
       super.init(coder: aDecoder)
-   }
-   
-   // MARK: Bringing the controller up
-   override func awakeFromNib() {
-      print("\(__FILE__), \(__FUNCTION__)")
-   }
-   
-   // *******************************************
-   // MARK: UIViewController specific lifecycle
-   // *******************************************
-   
-   override func viewDidLoad() {
-      print("\(__FILE__), \(__FUNCTION__)")
+    }
+    
+    // MARK: -
+    // *******************************************
+    // MARK: UIViewController specific lifecycle
+    // *******************************************
+    // MARK: -
+    // MARK: Bringing the controller up
+    override func loadView() {
+        //This is the function that loads view objects from nib files
+        super.loadView()
+        print("\(__FILE__), \(__FUNCTION__)")
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        print("\(__FILE__), \(__FUNCTION__)")
+    }
+
+    override func viewDidLoad() {
+    //Called once the view is loaded in memory (and everything is hoooked up)
       super.viewDidLoad()
-      
+      print("\(__FILE__), \(__FUNCTION__)")
       // Do any additional setup after loading the view, typically from a nib.
       
       //Set initial app state - this kicks off everything else
       self.updateStateWithInput(.Start)
-   }
-   override func viewWillAppear(animated: Bool) {
+    }
+
+    override func viewWillAppear(animated: Bool) {
       super.viewWillAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   override func viewDidAppear(animated: Bool) {
+    }
+    override func viewDidAppear(animated: Bool) {
       super.viewDidAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   // MARK: Updates to layout
-   override func viewWillLayoutSubviews() {
+    }
+    // MARK: Updates to layout
+    override func viewWillLayoutSubviews() {
       super.viewWillLayoutSubviews()
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   override func viewDidLayoutSubviews() {
+    }
+    override func viewDidLayoutSubviews() {
       super.viewDidLayoutSubviews()
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   // MARK: Tearing the controller down
-   override func viewWillDisappear(animated: Bool) {
+    }
+    // MARK: Tearing the controller down
+    override func viewWillDisappear(animated: Bool) {
       super.viewWillDisappear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   override func viewDidDisappear(animated: Bool) {
+    }
+    override func viewDidDisappear(animated: Bool) {
       super.viewDidDisappear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   deinit {
+    }
+    deinit {
       print("\(__FILE__), \(__FUNCTION__)")
-   }
-   
+    }
+    
+   // MARK: -
    // ************************
    // MARK: Events and Actions
    // ************************
