@@ -53,13 +53,13 @@
                                 <rect key="frame" x="113" y="549" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Root view:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPG-rF-mQv">
-                                <rect key="frame" x="20" y="554" width="79.5" height="20.5"/>
+                                <rect key="frame" x="20" y="554" width="80" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeu-Dd-4KU">
-                                <rect key="frame" x="402" y="554" width="117" height="20.5"/>
+                                <rect key="frame" x="402" y="554" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -100,12 +100,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="885" y="626"/>
+            <point key="canvasLocation" x="679" y="362"/>
         </scene>
         <!--Child View Controller-->
         <scene sceneID="C7a-Cy-M0S">
             <objects>
                 <viewController id="fpn-ar-jLW" customClass="ChildViewController" customModule="ResponderChainDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cj9-sk-vj0"/>
+                        <viewControllerLayoutGuide type="bottom" id="KPS-KD-0kn"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AnJ-xL-BgB" customClass="DarkGreyView" customModule="ResponderChainDemo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="560" height="246"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -126,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQb-XH-geL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1621" y="681"/>
+            <point key="canvasLocation" x="1409" y="210"/>
         </scene>
     </scenes>
 </document>
