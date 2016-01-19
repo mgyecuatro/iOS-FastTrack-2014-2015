@@ -78,13 +78,13 @@
 		078598E51C0C467A00807E6A /* BackgroundTest */ = {
 			isa = PBXGroup;
 			children = (
+				078598EA1C0C467A00807E6A /* Main.storyboard */,
 				07F21C851C3E8E8600AEC428 /* BCModel.swift */,
 				07632AFA1C11B7C20072A43F /* BCGlobals.swift */,
 				07632AF81C11A5B70072A43F /* BCOptions.swift */,
 				078598E61C0C467A00807E6A /* AppDelegate.swift */,
 				078598E81C0C467A00807E6A /* BCCurrentPositionViewController.swift */,
 				076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */,
-				078598EA1C0C467A00807E6A /* Main.storyboard */,
 				078598ED1C0C467A00807E6A /* Assets.xcassets */,
 				078598EF1C0C467A00807E6A /* LaunchScreen.storyboard */,
 				078598F21C0C467A00807E6A /* Info.plist */,

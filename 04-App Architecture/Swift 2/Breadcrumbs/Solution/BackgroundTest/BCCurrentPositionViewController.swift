@@ -161,7 +161,14 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       super.viewDidAppear(animated)
       print("\(__FILE__), \(__FUNCTION__)")
     }
+    
     // MARK: Updates to layout
+    
+    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        //Forward the message to presented / child view controllers
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        print("\(__FILE__), \(__FUNCTION__) : new traits \(newCollection)")
+    }
     override func viewWillLayoutSubviews() {
       super.viewWillLayoutSubviews()
       print("\(__FILE__), \(__FUNCTION__)")
@@ -193,7 +200,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       // Dispose of any resources that can be recreated.
       print("\(__FILE__), \(__FUNCTION__)")
    }
-   
+    
    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
       print("Authorisation changed to \(status.rawValue)")
       if status == CLAuthorizationStatus.AuthorizedAlways {
@@ -249,17 +256,21 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    
    func dismissWithUpdatedOptions(updatedOptions: BCOptions?) {
       print("\(__FILE__), \(__FUNCTION__)")
-      //If saved, updatedOptions will have a wrapped copy
-      if let op = updatedOptions {
-         self.options = op             //Make copy
-
-         //Update the application UI and Location manager
-         updateOutputWithState()
-      }
-      
+    
       //Using a trailing closure syntax, dismiss the presented and run completion handler
       self.dismissViewControllerAnimated(true) {
          print("Presented animation has now completed")
+        
+        //If saved, updatedOptions will have a wrapped copy
+        if let op = updatedOptions {
+            self.options = op             //Make copy
+            
+            //Update the application UI and Location manager
+            dispatch_async(dispatch_get_main_queue()) {
+                self.updateOutputWithState()
+            }
+        }
+        
       }
    }
    
@@ -463,6 +474,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
 
       } //end switch
    }
-   
+    
 }
 
