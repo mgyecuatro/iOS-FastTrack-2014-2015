@@ -24,6 +24,7 @@ final class BCModel {
    
    // MARK: Life-cycle
    
+    //The constructor is private, so it cannot be instantiated anywhere else
    private init() {
       //Phase 1 has nothing to do
       
