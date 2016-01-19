@@ -230,10 +230,12 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    
    @IBAction func doClear(sender: AnyObject) {
       globalModel.erase() {
-         globalModel.deleteDataFromCloudKit() { (didSucceed : Bool) in
-            print("Data delete \(didSucceed)")
-         }
-         self.updateStateWithInput(.None)
+        globalModel.save() {
+            globalModel.deleteDataFromCloudKit() { (didSucceed : Bool) in
+                print("Data delete \(didSucceed)")
+            }
+        }
+        self.updateStateWithInput(.None)
       }
    }
    
