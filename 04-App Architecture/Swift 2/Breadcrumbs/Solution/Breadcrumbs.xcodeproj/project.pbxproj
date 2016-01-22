@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0744586F1C40367600D398B2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0744586E1C40367600D398B2 /* CloudKit.framework */; };
-		0755F80E1C526AC6006E1EF0 /* BCOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0755F80C1C526AC6006E1EF0 /* BCOptions.storyboard */; };
+		0755F80E1C526AC6006E1EF0 /* BCOptionsTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0755F80C1C526AC6006E1EF0 /* BCOptionsTableViewController.storyboard */; };
 		07632AF91C11A5B70072A43F /* BCOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07632AF81C11A5B70072A43F /* BCOptions.swift */; };
 		07632AFB1C11B7C20072A43F /* BCGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07632AFA1C11B7C20072A43F /* BCGlobals.swift */; };
 		076805C11C0F35B70029701C /* BCOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */; };
@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		0744586D1C40366F00D398B2 /* Breadcrumbs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Breadcrumbs.entitlements; sourceTree = "<group>"; };
 		0744586E1C40367600D398B2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		0755F80D1C526AC6006E1EF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BCOptions.storyboard; sourceTree = "<group>"; };
+		0755F80D1C526AC6006E1EF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/BCOptionsTableViewController.storyboard; sourceTree = "<group>"; };
 		07632AF81C11A5B70072A43F /* BCOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCOptions.swift; sourceTree = "<group>"; };
 		07632AFA1C11B7C20072A43F /* BCGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCGlobals.swift; sourceTree = "<group>"; };
 		076805C01C0F35B70029701C /* BCOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BCOptionsTableViewController.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				078598EA1C0C467A00807E6A /* Main.storyboard */,
-				0755F80C1C526AC6006E1EF0 /* BCOptions.storyboard */,
+				0755F80C1C526AC6006E1EF0 /* BCOptionsTableViewController.storyboard */,
 				07F21C851C3E8E8600AEC428 /* BCModel.swift */,
 				07632AFA1C11B7C20072A43F /* BCGlobals.swift */,
 				07632AF81C11A5B70072A43F /* BCOptions.swift */,
@@ -171,7 +171,7 @@
 			files = (
 				078598F11C0C467A00807E6A /* LaunchScreen.storyboard in Resources */,
 				078598EE1C0C467A00807E6A /* Assets.xcassets in Resources */,
-				0755F80E1C526AC6006E1EF0 /* BCOptions.storyboard in Resources */,
+				0755F80E1C526AC6006E1EF0 /* BCOptionsTableViewController.storyboard in Resources */,
 				07B6E58D1C4FABF7001BDA1F /* Gran Canaria.gpx in Resources */,
 				078598EC1C0C467A00807E6A /* Main.storyboard in Resources */,
 				07CDA5591C37A72B0077CFAC /* factoryDefaults.plist in Resources */,
@@ -197,12 +197,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0755F80C1C526AC6006E1EF0 /* BCOptions.storyboard */ = {
+		0755F80C1C526AC6006E1EF0 /* BCOptionsTableViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0755F80D1C526AC6006E1EF0 /* Base */,
 			);
-			name = BCOptions.storyboard;
+			name = BCOptionsTableViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		078598EA1C0C467A00807E6A /* Main.storyboard */ = {

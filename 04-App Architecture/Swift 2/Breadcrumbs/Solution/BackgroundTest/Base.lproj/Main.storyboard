@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="382.5" y="429"/>
         </scene>
-        <!--BCOptions-->
+        <!--BCOptionsTableViewController-->
         <scene sceneID="jPV-PO-zjb">
             <objects>
-                <viewControllerPlaceholder storyboardName="BCOptions" id="h41-jg-kUn" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="BCOptionsTableViewController" id="h41-jg-kUn" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3fA-EY-maG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1248.75" y="429"/>
