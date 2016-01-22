@@ -88,7 +88,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
     }
 
     ///This property is "lazy". Only runs once, when the property is first referenced
-    lazy var locationManager : CLLocationManager = {
+    private lazy var locationManager : CLLocationManager = {
       [unowned self] in
       print("Instantiating and initialising the location manager \"lazily\"")
       print("This will only run once")
@@ -116,7 +116,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
     // ************************
     // MARK: Class Initialisers
     // ************************
-
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
       print("\(__FILE__), \(__FUNCTION__)")
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

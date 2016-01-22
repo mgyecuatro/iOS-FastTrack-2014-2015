@@ -31,7 +31,7 @@ final class BCModel {
       //Call superclass if you subclass
 //      super.init()
       
-      //Phase 2 - super is now available
+      //Phase 2 - self is now available
       if let m = NSKeyedUnarchiver.unarchiveObjectWithFile(self.archivePath) as? [CLLocation] {
          arrayOfLocations = m
       } else {
@@ -110,8 +110,9 @@ final class BCModel {
       }
    }
    
-   /// CLOUDKIT (very basic, assumes non-failure)
-   
+    
+    // MARK: Cloud Kit
+    
    /// Upload the array of data to CloudKit
    func uploadToCloudKit(done : (didSucceed : Bool)->() ) {
       //Fetch a copy of the array
@@ -154,6 +155,5 @@ final class BCModel {
          done(didSucceed: true)
       }
    }
-   
    
 }

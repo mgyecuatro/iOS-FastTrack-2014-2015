@@ -134,7 +134,10 @@ class BCOptionsTableViewController: UITableViewController {
         return false
     }
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return UIInterfaceOrientation.Portrait
+        return .Portrait
+    }
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return [.Portrait]
     }
 
 }
