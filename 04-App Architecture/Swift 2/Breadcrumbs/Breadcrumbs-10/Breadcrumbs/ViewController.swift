@@ -202,9 +202,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             
             //Live Map
             mapView.showsUserLocation = true
-            mapView.userTrackingMode = .Follow
-            mapView.showsTraffic = true
+            mapView.userTrackingMode = self.options.userTrackingMode
+            mapView.showsTraffic = self.options.showTraffic
             mapView.delegate = self
+            
+            //Location Manager
+            locationManager.desiredAccuracy = self.options.gpsPrecision
+            locationManager.distanceFilter  = self.options.distanceBetweenMeasurements
+            locationManager.allowsBackgroundLocationUpdates = self.options.backgroundUpdates
+            locationManager.stopUpdatingLocation()
+            locationManager.stopUpdatingHeading()
             
         case .LiveMapLogging:
             //Buttons
@@ -217,7 +224,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             mapView.userTrackingMode = .Follow
             mapView.showsTraffic = true
             mapView.delegate = self
-            
+
+            //Location Manager
+            locationManager.desiredAccuracy = self.options.gpsPrecision
+            locationManager.distanceFilter  = self.options.distanceBetweenMeasurements
+            locationManager.allowsBackgroundLocationUpdates = self.options.backgroundUpdates
+            locationManager.startUpdatingLocation()
+            if self.options.headingAvailable {
+                locationManager.startUpdatingHeading()
+            }
         }
     }
 
@@ -226,6 +241,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.dismissViewControllerAnimated(true) {
             if let op = updatedOptions {
                 self.options = op
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.updateOutputWithState()
+                }
             }
         }
     }

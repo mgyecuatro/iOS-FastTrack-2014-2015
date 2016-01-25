@@ -446,6 +446,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
          locationManager.distanceFilter = self.options.distanceBetweenMeasurements
          locationManager.allowsBackgroundLocationUpdates = false
          locationManager.stopUpdatingLocation()
+         locationManager.stopUpdatingHeading()
          
       case .LiveMapLogging:
          //Buttons

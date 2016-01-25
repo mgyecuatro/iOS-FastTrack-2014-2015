@@ -41,7 +41,10 @@ class BCOptionsTableViewController: UITableViewController {
       //Only devices with heading support can switch on the heading UP support
       if self.options.headingAvailable {
          self.headingUPSwitch.on = self.options.headingUP
+         self.headingUPSwitch.enabled = true
+         self.headingUPLabel.alpha = 1.0
       } else {
+         self.headingUPSwitch.on = false
          self.headingUPSwitch.enabled = false
          self.headingUPLabel.alpha = 0.2
       }
