@@ -26,9 +26,6 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GDU-WQ-m6T">
                                                     <rect key="frame" x="543" y="7" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="doBackgroundUpdateSwitch:" destination="hxg-PX-PEv" eventType="valueChanged" id="dud-jl-HbL"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background updates:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1lC-DP-gMU">
                                                     <rect key="frame" x="14" y="11" width="164" height="21"/>
@@ -59,9 +56,6 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oHe-FJ-AS4">
                                                     <rect key="frame" x="543" y="7" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="doHeadingUpSwitch:" destination="hxg-PX-PEv" eventType="valueChanged" id="YEd-59-ErF"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heading Up:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCN-IB-n3V">
                                                     <rect key="frame" x="14" y="12" width="96" height="21"/>
@@ -87,9 +81,6 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="a28-eM-UNw">
                                                     <rect key="frame" x="543" y="7" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="doShowTrafficSwitch:" destination="hxg-PX-PEv" eventType="valueChanged" id="YiT-sb-NxR"/>
-                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Traffic:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7K-hR-iOQ">
                                                     <rect key="frame" x="14" y="12" width="101" height="21"/>
@@ -156,9 +147,6 @@
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="1" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="6UW-Z3-fCV">
                                                     <rect key="frame" x="6" y="13" width="588" height="31"/>
-                                                    <connections>
-                                                        <action selector="doDistanceSliderChanged:" destination="hxg-PX-PEv" eventType="valueChanged" id="BLj-ow-and"/>
-                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -220,9 +208,6 @@
                                             <subviews>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="5" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="45i-2v-jNL">
                                                     <rect key="frame" x="6" y="13" width="588" height="31"/>
-                                                    <connections>
-                                                        <action selector="doGPSPrecisionSliderChanged:" destination="hxg-PX-PEv" eventType="valueChanged" id="q3h-AL-6mc"/>
-                                                    </connections>
                                                 </slider>
                                             </subviews>
                                             <constraints>
@@ -315,16 +300,6 @@
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="900"/>
-                    <connections>
-                        <outlet property="backgroundUpdateSwitch" destination="GDU-WQ-m6T" id="K5I-sB-3t6"/>
-                        <outlet property="distanceLabel" destination="bd5-mG-ph3" id="oI8-82-bTE"/>
-                        <outlet property="distanceSlider" destination="6UW-Z3-fCV" id="NId-QU-AUm"/>
-                        <outlet property="gpsPrecisionLabel" destination="jAa-dU-coR" id="DQu-3Z-4zJ"/>
-                        <outlet property="gpsPrecisionSlider" destination="45i-2v-jNL" id="Fih-uI-aRf"/>
-                        <outlet property="headingUPLabel" destination="PCN-IB-n3V" id="RIp-8o-kr6"/>
-                        <outlet property="headingUPSwitch" destination="oHe-FJ-AS4" id="AWK-Ab-nGC"/>
-                        <outlet property="showTrafficSwitch" destination="a28-eM-UNw" id="wvp-OO-gkS"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q7s-dE-qja" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
