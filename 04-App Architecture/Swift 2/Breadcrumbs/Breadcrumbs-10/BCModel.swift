@@ -31,43 +31,53 @@ final class BCModel {
 
     }
     
-    // MARK: - Asynchronous API
-    func addRecord(record: CLLocation, done : ()->()) {
-        let r = CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)
+    //Asynchronous API
+    func addRecord(record: CLLocation, done: ()->()) {
         dispatch_async(queue) {
-            self.arrayOfLocations.append(r)
+            self.arrayOfLocations.append(record)
             dispatch_sync(dispatch_get_main_queue(), done)
         }
     }
+    
     /// Add an array of records
+    // A Swift array of immutable references is also thread safe
     func addRecords(records : [CLLocation], done : ()->() ) {
-        //Make a copy
-        let myCopy = records.map() { CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) } //Not lazy any more
-        //Append on the queue
         dispatch_async(queue){
-            for r in myCopy {
+            for r in records {
                 self.arrayOfLocations.append(r)
             }
             //Call back on main thread (posted to main runloop)
             dispatch_sync(dispatch_get_main_queue(), done)
         }
     }
-    /// Thread-safe read access
-    func getArray(done done : (array : [CLLocation]) -> () ) {
-        dispatch_async(queue){
-            let copyOfArray = self.arrayOfLocations.map() {
-                CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
-            }
+    
+    /// Erase all data (serialised on a background thread)
+    func erase(done done : ()->() ) {
+        dispatch_async(queue) {
+            self.arrayOfLocations.removeAll()
             //Call back on main thread (posted to main runloop)
-            dispatch_sync(dispatch_get_main_queue(), { done(array: copyOfArray) })
+            dispatch_sync(dispatch_get_main_queue(), done)
+        }
+    }
+
+    // get array
+    func getArray(done done : (array : [CLLocation]) -> () ) {
+        dispatch_async(queue) {
+            let copyOfArray = self.arrayOfLocations
+            dispatch_sync(dispatch_get_main_queue()) {
+                done(array: copyOfArray)
+            }
         }
     }
     
-    /// Query if the array is empty
-    func isEmpty(done done : (isEmpty : Bool) -> () ) {
+    /// Save the array to persistant storage (simple method) serialised on a background thread
+    func save(done done : ()->() ) {
         dispatch_async(queue) {
-            let result = self.arrayOfLocations.count == 0 ? true : false
-            dispatch_sync(dispatch_get_main_queue(), { done(isEmpty: result) })
+            NSKeyedArchiver.archiveRootObject(self.arrayOfLocations, toFile: self.archivePath)
+            //Call back on main thread (posted to main runloop)
+            dispatch_sync(dispatch_get_main_queue(), done)
         }
     }
+    
+    
 }
