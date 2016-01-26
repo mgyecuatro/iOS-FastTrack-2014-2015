@@ -71,37 +71,33 @@ final class BCModel {
    
    /// Add a record (serialised on a background thread)
    func addRecord(record : CLLocation, done : ()->() ) {
-    let r = CLLocation(latitude: record.coordinate.latitude, longitude: record.coordinate.longitude)
-    dispatch_async(queue) {
-        self.arrayOfLocations.append(r)
-        dispatch_sync(dispatch_get_main_queue(), done)
-    }
+      dispatch_async(queue){
+         self.arrayOfLocations.append(record)
+         //Call back on main thread (posted to main runloop)
+         dispatch_sync(dispatch_get_main_queue(), done)
+      }
    }
    
-    /// Add an array of records
-    func addRecords(records : [CLLocation], done : ()->() ) {
-        //Make a copy
-        let myCopy = records.map() { CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude) } //Not lazy any more
-        //Append on the queue
-        dispatch_async(queue){
-            for r in myCopy {
-                self.arrayOfLocations.append(r)
-            }
-            //Call back on main thread (posted to main runloop)
-            dispatch_sync(dispatch_get_main_queue(), done)
-        }
-    }
+   /// Add an array of records
+   func addRecords(records : [CLLocation], done : ()->() ) {
+      dispatch_async(queue){
+         for r in records {
+            self.arrayOfLocations.append(r)
+         }
+         //Call back on main thread (posted to main runloop)
+         dispatch_sync(dispatch_get_main_queue(), done)
+      }
+   }
    
-    /// Thread-safe read access
-    func getArray(done done : (array : [CLLocation]) -> () ) {
-        dispatch_async(queue){
-            let copyOfArray = self.arrayOfLocations.map() {
-                CLLocation(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude)
-            }
-            //Call back on main thread (posted to main runloop)
-            dispatch_sync(dispatch_get_main_queue(), { done(array: copyOfArray) })
-        }
-    }
+   /// Thread-safe read access
+   func getArray(done done : (array : [CLLocation]) -> () ) {
+      var copyOfArray : [CLLocation]!
+      dispatch_async(queue){
+         //Call back on main thread (posted to main runloop)
+         copyOfArray = self.arrayOfLocations
+         dispatch_sync(dispatch_get_main_queue(), { done(array: copyOfArray) })
+      }
+   }
    
    /// Query if the container is empty
    func isEmpty(done done : (isEmpty : Bool) -> () ) {
