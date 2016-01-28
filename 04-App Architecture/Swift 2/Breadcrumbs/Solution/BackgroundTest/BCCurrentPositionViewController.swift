@@ -301,9 +301,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    }
    
    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-      guard let location = locations.last else { return }
+      guard let _ = locations.last else { return }
       
-      print("\(locations.count) Location(s) Updated: \(location)")
+      print("\(locations.count) Location(s) Updated.")
 
       //Store in array
       globalModel.addRecords(locations) {
