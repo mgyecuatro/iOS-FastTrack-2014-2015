@@ -109,9 +109,6 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
 
     //Internal flag for deferred updates
     var deferringUpdates : Bool = false
-
-    //Array of GPS locations
-    var _arrayOfLocations = [CLLocation]()
    
     // ************************
     // MARK: Class Initialisers
@@ -316,10 +313,9 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
     // ************************
     func updateMapOverlay() {
         globalModel.getArray() { (array : [CLLocation]) in
-            self._arrayOfLocations = array
             
             //Update overlay of the journey
-            var arrayOfCoords : [CLLocationCoordinate2D] = self._arrayOfLocations.map{$0.coordinate}  //Array of coordinates
+            var arrayOfCoords : [CLLocationCoordinate2D] = array.map{$0.coordinate}  //Array of coordinates
             let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
             self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
             self.mapView.addOverlay(line)                      //Add updated
