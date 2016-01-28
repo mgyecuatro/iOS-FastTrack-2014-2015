@@ -231,11 +231,11 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
    @IBAction func doClear(sender: AnyObject) {
       globalModel.erase() {
         globalModel.save() {
+            self.updateStateWithInput(.None)
             globalModel.deleteDataFromCloudKit() { (didSucceed : Bool) in
                 print("Data delete \(didSucceed)")
             }
         }
-        self.updateStateWithInput(.None)
       }
    }
    
@@ -276,20 +276,7 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       }
    }
    
-   // ************************
-   // MARK: Update Map Overlay
-   // ************************
-   func updateMapOverlay() {
-      globalModel.getArray() { (array : [CLLocation]) in
-         self._arrayOfLocations = array
-         
-         //Update overlay of the journey
-         var arrayOfCoords : [CLLocationCoordinate2D] = self._arrayOfLocations.map{$0.coordinate}  //Array of coordinates
-         let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
-         self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
-         self.mapView.addOverlay(line)                      //Add updated
-      }
-   }
+
    
    
    // *******************************
@@ -324,6 +311,21 @@ class BCCurrentPositionViewController: UIViewController, CLLocationManagerDelega
       self.deferringUpdates = false
    }
   
+    // ************************
+    // MARK: Update Map Overlay
+    // ************************
+    func updateMapOverlay() {
+        globalModel.getArray() { (array : [CLLocation]) in
+            self._arrayOfLocations = array
+            
+            //Update overlay of the journey
+            var arrayOfCoords : [CLLocationCoordinate2D] = self._arrayOfLocations.map{$0.coordinate}  //Array of coordinates
+            let line = MKPolyline(coordinates: &arrayOfCoords, count: arrayOfCoords.count)
+            self.mapView.removeOverlays(self.mapView.overlays) //Remove previous line
+            self.mapView.addOverlay(line)                      //Add updated
+        }
+    }
+    
    // ***********************
    // MARK: MKMapViewDelegate
    // ***********************
