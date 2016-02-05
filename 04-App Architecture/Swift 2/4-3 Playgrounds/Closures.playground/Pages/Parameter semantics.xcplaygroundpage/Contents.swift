@@ -8,7 +8,7 @@ import XCPlayground
 //: ### Default values cannot be used for closures
 
 //: ### Optional Parameters - same as functions
-let message = { (name name : String, title title : String?) -> String in
+let message = { (name : String, title : String?) -> String in
    var message = "Greetings "
    
    if let t = title {
@@ -19,8 +19,8 @@ let message = { (name name : String, title title : String?) -> String in
    return message
 }
 
-message(name: "Spock", title: "Mr")
-message(name: "Bones", title: nil)
+message("Spock", "Mr")
+message("Bones", nil)
 
 //: ### Variable Parameters - same as functions
 //: To save creating another local variable, you can make a parameter a variable.
@@ -49,7 +49,7 @@ mac2(&a, 5.0, 2.0)
 
 //: ### variable number of parameters - same as functions 
 
-let recipe = { (title t: String, ingredients: String...) -> String in
+let recipe = { (t: String, ingredients: String...) -> String in
    
    var description = "<P><h2>" + t + "</h2><ul>"
    for ingredient in ingredients {
@@ -59,7 +59,7 @@ let recipe = { (title t: String, ingredients: String...) -> String in
    return description
 }
 
-let page = recipe(title: "Perfect Breakfast", "Cold Pizza", "Meat-balls", "Biriani")
+let page = recipe("Perfect Breakfast", "Cold Pizza", "Meat-balls", "Biriani")
 let wv = UIWebView(frame: CGRectMake(0,0,200,200))
 wv.loadHTMLString(page, baseURL: nil)
 

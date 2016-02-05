@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct Fred {
+    var a : Int = 0
+    var b : Int = 99
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       // Override point for customization after application launch.
       print("\(__FILE__), \(__FUNCTION__)")
+    
+    var c1 : Fred = Fred()
+    var c2 : Fred = c1
+    c1.a = c1.a + 1
+    c2.b = c2.a + 1
+    print("c2 = \(c2.a)")
+    
       
       return true
    }

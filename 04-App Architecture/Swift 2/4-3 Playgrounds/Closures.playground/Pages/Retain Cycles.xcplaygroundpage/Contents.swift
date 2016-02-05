@@ -50,11 +50,11 @@ class Object2 {
    let _id : String
    
    init(id : String) {
-      print("Init \(id)",separator: "")
+      print("Init \(id)",separator: "", terminator: "")
       _id = id
    }
    deinit {
-      print("deinit \(_id)",separator: "")
+      print("deinit \(_id)",separator: "", terminator: "")
       if _id == "Object 2" {
          XCPlaygroundPage.currentPage.captureValue(_id, withIdentifier: "Object 2 is deallocated")         
       }
@@ -183,7 +183,7 @@ class Owner : CanOpenATin {
    
    //This should be called once there are no more strong references to this instance
    deinit {
-      print("Deallocating")
+      print("Deallocating", terminator: "")
       XCPlaygroundPage.currentPage.captureValue(onlyPet.name, withIdentifier: "Owner for the following pet is being deallocated")
    }
 }
@@ -197,7 +197,7 @@ var owner = Owner(withPet: cat)
 
 //: Double check everything is hooked up
 if let opened = cat.owner?.openPetFoodTin() where opened == true {
-   print("Purrrrrr",separator: "")
+   print("Purrrrrr",separator: "", terminator: "")
 }
 
 //: Now switch the reference to another instance of Owner. The old should be deallocated as this was the only reference.
@@ -246,7 +246,7 @@ class Person {
    
    //This should run when deallocated
    deinit {
-      print("Deallocating person \(lastName)")
+      print("Deallocating person \(lastName)", terminator: "")
       XCPlaygroundPage.currentPage.captureValue(self.lastName, withIdentifier: "Instance being deallocated")
    }
    

@@ -38,7 +38,7 @@ func synchronousHillClimbWithInitialValue(var x0 : Double, 𝛌 : Double, maxIte
       slope = estimateSlope(x0)
       
       //Update count
-      iteration++
+      iteration += 1
       
       if iteration == maxIterations {
          return nil

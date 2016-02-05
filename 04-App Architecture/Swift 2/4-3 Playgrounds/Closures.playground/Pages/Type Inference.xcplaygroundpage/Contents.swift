@@ -55,11 +55,11 @@ theTimeNow.dynamicType
 
 //: ### Example - no parameters
 let c1 = { (_ : Void) -> Void in
-   print("This has no parameters", separator: "")
+   print("This has no parameters", separator: "", terminator: "")
 }
 //: `(_ : Void)` can be expressed as `()`
 let c2 = { () -> Void in
-   print("This has no parameters", separator: "")
+   print("This has no parameters", separator: "", terminator: "")
 }
 //: The return type `Void` can also be expressed as `()`
 let c3 = { () in ()
@@ -71,10 +71,10 @@ let c4 = { ()
 }
 //: For empty parameters, simply drop the `()` as it will be again inferred.
 let c5 = {
-   print("This has no parameters", separator: "")
+   print("This has no parameters", separator: "", terminator: "")
 }
 //: Written on one line 
-let c6 = { print("This has no parameters", separator: "") }
+let c6 = { print("This has no parameters", separator: "", terminator: "") }
 
 //: These are all equivalent
 c1

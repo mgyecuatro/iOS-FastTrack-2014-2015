@@ -79,17 +79,17 @@ func hillClimbWithInitialValue(var x0 : Double, 𝛌 : Double, maxIterations: In
 let fcn : Double->Double = { sin($0) }
 //: * A callback closure (which is performed in the runloop of the main thread)
 let complete = { (solution : SOLN?) -> Void in
-   print("Completed: \(NSDate())", separator: "")
+   print("Completed: \(NSDate())", separator: "", terminator: "")
 
    if let s = solution {
-      print("Peak of value \(s.y) found at x=\(rad2deg(s.x)) degrees", separator: "")
+      print("Peak of value \(s.y) found at x=\(rad2deg(s.x)) degrees", separator: "", terminator: "")
    } else {
-      print("Did not converge")
+      print("Did not converge", terminator: "")
    }
 }
 //: Invoke
 hillClimbWithInitialValue(0.1, 𝛌: 0.01, maxIterations: 10000, fn: fcn, completion: complete)
-print("Started: \(NSDate())", separator: "")
+print("Started: \(NSDate())", separator: "", terminator: "")
 //: Look at the times - you can see the call-back has occured after the start, and that the duration is significant (in the order of seconds). Note this is likely to be somewhat different for a Playground, but the principle is the same. Network transactions can be much longer.
 
 

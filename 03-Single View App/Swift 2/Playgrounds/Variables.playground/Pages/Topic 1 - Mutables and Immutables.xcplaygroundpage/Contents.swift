@@ -38,7 +38,7 @@ var age : Int
 //: *Experiment* Now initialise age (e.g. `var age : Int = 20`) and try again
 
 /*:
-his is a safety feature. Using variables before they are initialised can result in bugs that are hard to track down. We will have more to say about initialisation when we look at structures and classes.
+This is a safety feature. Using variables before they are initialised can result in bugs that are hard to track down. We will have more to say about initialisation when we look at structures and classes.
 
 Initialisation is not limited to literals. You can also initialise variables with an expression, such as the following example
 */
