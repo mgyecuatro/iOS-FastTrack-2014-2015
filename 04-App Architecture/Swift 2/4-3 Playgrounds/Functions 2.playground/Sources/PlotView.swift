@@ -86,8 +86,7 @@ public class PlotView : UIView {
         self.points = points
     }
     //Required convenience method
-    required public init?(coder: NSCoder) {
-        super.init(coder: coder)
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    
 }
