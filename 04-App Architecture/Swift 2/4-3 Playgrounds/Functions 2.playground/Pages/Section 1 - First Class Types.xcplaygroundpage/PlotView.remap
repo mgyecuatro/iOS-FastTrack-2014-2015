@@ -1,0 +1,8 @@
+[
+ {
+  "file": "/Users/noutram/Work/git/iOS-FastTrack-2014-2015/04-App Architecture/Swift 2/4-3 Playgrounds/Functions 2.playground/Sources/PlotView.swift",
+  "offset": 2897,
+  "remove": 18,
+  "text": ";?(coder: NSCoder) {\n\n    required init?(coder aDecoder: NSCoder) {\n        fatalError(\"init(coder:) has not been implemented\")\n    }",
+ }
+]
